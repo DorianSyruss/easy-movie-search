@@ -1,7 +1,7 @@
 /**
  * Created by engine on 22/02/2017.
  */
-import fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
 
 let url = 'http://www.imdb.com/year/2017/'
 fetch(url).then(function (response) {

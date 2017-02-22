@@ -1,0 +1,29 @@
+{
+  "name": "scrape-now",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config ./webpack.config.js --display-modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DorianSyruss/ScrapeNow.git"
+  },
+  "author": "Ivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DorianSyruss/ScrapeNow/issues"
+  },
+  "homepage": "https://github.com/DorianSyruss/ScrapeNow#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "whatwg-fetch": "^2.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}

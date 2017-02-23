@@ -4,8 +4,28 @@
 import 'whatwg-fetch';
 
 const proxy = 'https://cors.now.sh/';
-const url = 'http://www.imdb.com/year/2017/';
-const fullUrl = `${proxy}${url}`;
+
+let sendInput = document.getElementById('sendInput');
+sendInput.addEventListener('click', getYearUrl,false);
+
+function proxiedUrl() {
+  const baseUrl = `${proxy}http://www.imdb.com/year/2017/`;
+  return baseUrl;
+}
+
+function getYearUrl() {
+  let yearUrl = 'http://www.imdb.com/year/';
+  let inputYear = document.getElementById('inputYear').value;
+  document.getElementById('movieYear').innerHTML = inputYear;
+  yearUrl = `${yearUrl}${inputYear}`;
+  let fullUrl = `${proxy}${yearUrl}`;
+  fetchDocument(fullUrl)
+    .then($doc => getMovies($doc))
+    .then(movies => {
+      console.table(movies);
+      renderMovies(movies);
+    });
+}
 
 function fetchDocument(url) {
   return fetch(url)
@@ -64,13 +84,18 @@ function renderMovie($output, movie) {
 
 function renderMovies(movies) {
   let $output = document.querySelector('.movies');
+  $output.innerHTML='';
+  console.log("nestoooo");
   movies.forEach(movie => renderMovie($output, movie));
 }
 
-fetchDocument(fullUrl)
+
+fetchDocument(proxiedUrl())
   .then($doc => getMovies($doc))
   .then(movies => {
     console.table(movies);
     renderMovies(movies);
   });
+
+
 

@@ -6,12 +6,17 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ScrapeMovies</title>
-  <script src="dist/bundle.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div class="content-wrapper">
+  <h1> MOST POPULAR MOVIES RELEASED IN <span id="movieYear">2017</span> </h1>
+  <div class="search">
+    <input id="inputYear" type="text" placeholder="Enter year ...">
+    <button id="sendInput">Search</button>
+  </div>
   <div class="movies"></div>
 </div>
+<script src="dist/bundle.js"></script>
 </body>
 </html>

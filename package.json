@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack  --watch --config ./webpack.config.js --display-modules",
+    "build:stats": "webpack  --config ./webpack.config.js --json > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,13 +19,13 @@
   },
   "homepage": "https://github.com/DorianSyruss/ScrapeNow#readme",
   "dependencies": {
+    "whatwg-fetch": "^2.0.2"
+  },
+  "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
-    "whatwg-fetch": "^2.0.2"
-  },
-  "devDependencies": {
     "webpack": "^2.2.1"
   }
 }

@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding = 0;
+}
+.content-wrapper{
+  background: darkgray;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+.movies {
+  display: block;
+  width: 550px;
+  margin: 0 auto;
+}
+
+.movies .movie {
+  display: block;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: whitesmoke;
+
+}
+
+.movie .title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.movies .title a {
+  text-decoration: none;
+  color: darkcyan;
+}
+  a:hover{
+    color: #b3cc3c !important;
+  }
+
+.movies .rating {
+  color: #9cbf1b;
+  margin-bottom: 4px;
+}
+
+.movies .content-right {
+  font-family: fantasy;
+  display: inline-block;
+  margin-left: 20px;
+  width: 75%;
+}
+
+.movies .content-right .genre {
+  margin-top: 10px;
+  color: #b7d235;
+}
+
+.movies img {
+  float: left;
+  width: 80px;
+}

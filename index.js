@@ -6,11 +6,20 @@ import 'whatwg-fetch';
 const proxy = 'https://cors.now.sh/';
 
 let sendInput = document.getElementById('sendInput');
-sendInput.addEventListener('click', getYearUrl,false);
+sendInput.addEventListener('click', getYearUrl, false);
 
 function proxiedUrl() {
   const baseUrl = `${proxy}http://www.imdb.com/year/2017/`;
   return baseUrl;
+}
+
+function listTopMovies(fullUrl) {
+  fetchDocument(fullUrl)
+    .then($doc => getMovies($doc))
+    .then(movies => {
+      console.table(movies);
+      renderMovies(movies);
+    });
 }
 
 function getYearUrl() {
@@ -19,12 +28,7 @@ function getYearUrl() {
   document.getElementById('movieYear').innerHTML = inputYear;
   yearUrl = `${yearUrl}${inputYear}`;
   let fullUrl = `${proxy}${yearUrl}`;
-  fetchDocument(fullUrl)
-    .then($doc => getMovies($doc))
-    .then(movies => {
-      console.table(movies);
-      renderMovies(movies);
-    });
+  listTopMovies(fullUrl);
 }
 
 function fetchDocument(url) {
@@ -63,7 +67,7 @@ function parseMovie($row) {
     rating,
     desc,
     imgUrl,
-    genre,
+    genre
   }
 }
 
@@ -81,7 +85,6 @@ function renderMovie($output, movie) {
   $output.innerHTML += html;
 }
 
-
 function renderMovies(movies) {
   let $output = document.querySelector('.movies');
   $output.innerHTML='';
@@ -89,13 +92,9 @@ function renderMovies(movies) {
   movies.forEach(movie => renderMovie($output, movie));
 }
 
+listTopMovies(proxiedUrl());
 
-fetchDocument(proxiedUrl())
-  .then($doc => getMovies($doc))
-  .then(movies => {
-    console.table(movies);
-    renderMovies(movies);
-  });
+
 
 
 

@@ -1,63 +1,58 @@
 body {
   margin: 0;
-  padding = 0;
+  padding:0;
 }
 .content-wrapper{
   background: white;
-  padding-top:20px;
   padding-bottom:20px;
 }
+header{
+  display: block;
+  margin: 0 auto;
+  width:767px;
+  height:50px;
+  background: #2196f3;
+}
 .content-wrapper h1{
-  text-shadow: 4px 4px 4px #aaa;
   font-size: 32px;
   text-align: center;
-  font-family:'Exo', sans-serif;
   margin-bottom:5px;
   padding:10px;
 }
-.search{
-  display: block;
-  width:100%;
-  text-align: center;
-}
-#inputYear{
-  display: inline-block;
-  border: 1px solid black;
-}
-#sendInput {
-  display:inline-block;
-  height:29px;
-  border-radius: 5px;
-  border:1px solid #d0f7f5;
-  background: lightblue;
-  font-family: 'Exo', sans-serif;
 
+#inputYear{
+  display: block;
+  margin: 0 auto;
+  width:200px;
 }
-#sendInput:focus {outline:0;}
-#sendInput:hover{box-shadow: 1px 1px 5px lightblue;}
-#inputYear::-webkit-input-placeholder{
-  color: blue;
-  padding-left:5px;
-  opacity: 0.4;
+
+.search{
+  width:290px;
+  margin: 0 auto;
 }
+
+.messageBoard {
+  display: block;
+  margin: 5px auto;
+  width: 240px;
+}
+
+.form-control::-webkit-input-placeholder { color: lightgray; font-size: 14px; }
 .movies {
   display: block;
   width: 550px;
   margin: 20px auto;
 }
-
 .movies .movie {
   display: block;
   padding: 20px;
   margin-bottom: 20px;
-  background: whitesmoke;
-
 }
 
 .movie .title {
   margin-bottom: 10px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .movies .title a {
@@ -65,7 +60,7 @@ body {
   color: darkcyan;
 }
   a:hover{
-    color: #b3cc3c !important;
+    color: #2196f3 !important
   }
 
 .movies .rating {
@@ -74,7 +69,6 @@ body {
 }
 
 .movies .content-right {
-  font-family: 'Exo', sans-serif;
   display: inline-block;
   min-height: 110px;
   margin-left: 20px;
@@ -93,11 +87,25 @@ body {
 
 .errorMess{
   display:none;
-  font-family: 'sansita', sans-serif;
+  margin-top:5px;
+  margin-bottom:5px;
+  font-family: "Exo", sans-serif;
+  font-weight: bold;
+  background: #e51c23;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
 }
 .noQueryMess{
   display:none;
-  font-family: 'sansita', sans-serif;
+  font-family: "Exo", sans-serif;
+  font-weight: bold;
+  background: #9c27b0;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
 }
 
 .loader {
@@ -118,6 +126,7 @@ body {
 
 @media only screen and (max-width:767px){
   .movies{width:100%;}
+  header{width: 100%;}
 }
 
 @media only screen and (max-width: 550px){

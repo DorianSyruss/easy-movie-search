@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ScrapeMovies</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -14,8 +17,15 @@
   <div class="search">
     <input id="inputYear" type="text" placeholder="Enter year ...">
     <button id="sendInput">Search</button>
+    <div class="errorMess">
+      <p>Please input a valid year</p>
+    </div>
+    <div class="noQueryMess">
+      <p>No Queries Matched... Please try again</p>
+    </div>
   </div>
   <div class="movies"></div>
+  <div class="loader"></div>
 </div>
 <script src="dist/bundle.js"></script>
 </body>

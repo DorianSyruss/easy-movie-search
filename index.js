@@ -3,6 +3,7 @@
  */
 import 'whatwg-fetch';
 import $ from "jquery";
+import 'bootstrap';
 
 const proxy = 'https://cors.now.sh/';
 const maxYear = 2050;
@@ -107,7 +108,7 @@ function renderMovie($output, movie) {
                <div class="title"><span>${movie.title}</span></div> 
                    <img src="${movie.imgUrl}" alt="">
                    <span class = "content-right">
-                       <div class="rating">${movie.rating || 'not rated' }</div> 
+                       <div class="rating">${movie.rating || 'not rated' } <span class="glyphicon glyphicon-star"></span></div> 
                        <div class="desc">${movie.desc}</div>
                        <div class="genre">${movie.genre}</div>
                    </span>

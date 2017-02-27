@@ -10,28 +10,57 @@
   <title>ScrapeMovies</title>
   <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="content-wrapper">
-  <header></header>
-  <h1> MOST POPULAR MOVIES RELEASED IN <span id="movieYear">2017</span> </h1>
-  <div class="search input-group">
-    <input id="inputYear" class="form-control" type="text" placeholder="Enter year ...">
-    <span class = "input-group-btn">
+  <div class="container">
+    <div class="navbar navbar-fixed-top" role="navigation" >
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="img/imdb_pro.png"></a>
+        </div>
+        <div class = "navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-middle">
+            <li class="active"><a href="http://localhost:63342/ScrapeNow/">Home</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Something<b class = "caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Something Useful</li>
+                <li><a href="#">Link1</a></li>
+                <li><a href="#">Link2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+    </div>
+    <h1> MOST POPULAR MOVIES RELEASED IN <span id="movieYear">2017</span></h1>
+    <div class="search input-group">
+      <input id="inputYear" class="form-control" type="text" placeholder="Enter year ...">
+      <span class="input-group-btn">
       <button id="sendInput" class="btn btn-primary" type="button">Search</button>
     </span>
-  </div>
-  <div class = "messageBoard">
-    <div class="errorMess">
-      <p>Please input a valid year</p>
     </div>
-    <div class="noQueryMess">
-      <p>Oh Snap! No Queries Matched... Please try again</p>
+    <div class="messageBoard">
+      <div class="errorMess">
+        <p>Please input a valid year</p>
+      </div>
+      <div class="noQueryMess">
+        <p>Oh Snap! No Queries Matched... Please try again</p>
+      </div>
     </div>
+    <ul class="movies list-group"></ul>
+    <div class="loader"></div>
   </div>
-  <ul class="movies list-group"></ul>
-  <div class="loader"></div>
-  </div>
+  <footer><p>Made by Ivan Saric, All rights reserved 2017</p></footer>
+</div>
 <script src="dist/bundle.js"></script>
 </body>
 </html>

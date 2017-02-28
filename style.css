@@ -85,7 +85,8 @@ a.list-group-item:hover {
 .messageBoard {
   display: block;
   margin: 5px auto;
-  width: 240px;
+  max-width: 300px;
+  padding: 0 5px;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -146,8 +147,7 @@ a.list-group-item:hover {
   font-weight: bold;
   background: #e51c23;
   border-radius: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 10px;
   color: #ffffff;
 }
 
@@ -172,8 +172,7 @@ footer p {
   font-weight: bold;
   background: #9c27b0;
   border-radius: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 10px;
   color: white;
 }
 

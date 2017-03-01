@@ -1,6 +1,8 @@
 /**
  * Created by engine on 22/02/2017.
  */
+require('./style/main.scss');
+
 import 'whatwg-fetch';
 import $ from "jquery";
 import 'bootstrap';

@@ -3,6 +3,7 @@
  */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -54,6 +55,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: 'assets',
+      to: 'assets'
+    }]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',

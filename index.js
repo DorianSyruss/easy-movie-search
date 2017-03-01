@@ -5,7 +5,6 @@ require('./style/main.scss');
 
 import 'whatwg-fetch';
 import $ from "jquery";
-import 'bootstrap';
 
 const proxy = 'https://cors.now.sh/';
 const maxYear = 2050;

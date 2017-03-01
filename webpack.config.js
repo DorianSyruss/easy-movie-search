@@ -4,6 +4,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -23,11 +24,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          use: 'css-loader',
+          fallback: 'style-loader'
+        })
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader' , 'sass-loader']
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader'],
+          fallback: 'style-loader'
+        })
       },
       {
         test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
@@ -59,6 +66,7 @@ module.exports = {
       from: 'assets',
       to: 'assets'
     }]),
+    new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',

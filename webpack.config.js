@@ -11,6 +11,7 @@ module.exports = {
     'bootstrap-loader',
     './index.js'
   ],
+  devtool: "eval",
   output: {
     filename: 'bundle.js',
     path: './dist'

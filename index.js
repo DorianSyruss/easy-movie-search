@@ -4,62 +4,64 @@
 require('./style/main.scss');
 
 import 'whatwg-fetch';
-import $ from "jquery";
+import $ from 'jquery';
 
 const proxy = 'https://cors.now.sh/';
 const maxYear = 2050;
 const minYear = 1950;
+const defaultYear = (new Date()).getFullYear()
 
-let sendInput = document.getElementById('sendInput');
-sendInput.addEventListener('click', getYearUrl, false);
+let sendInput = $('#sendInput');
+sendInput.on('click', getYearUrl);
 
-$("#inputYear").keyup(function (event) {
+let inputYear = $('#inputYear');
+inputYear.keyup(function (event) {
   if (event.keyCode == 13) {
-    $("#sendInput").click();
+    sendInput.click();
   }
 });
 
-function proxiedUrl() {
-  const baseUrl = `${proxy}http://www.imdb.com/year/2017/`;
-  return baseUrl;
+function fullUrl(year) {
+  return `${proxy}http://www.imdb.com/year/${year}`;
 }
 
 function listTopMovies(fullUrl) {
   fetchDocument(fullUrl)
-    .then($doc => getMovies($doc))
+    .then(doc => getMovies($(doc)))
     .then(movies => {
       $('.loader').fadeOut('fast');
       if (movies.length !== 0) {
         renderMovies(movies);
       } else {
-        document.querySelector('.movies').innerHTML = '';
-        $(".noQueryMess").fadeIn("slow");
+        $('.movies').empty();
+        $('.noQueryMess').fadeIn('slow');
       }
     });
 }
 
 function getYearUrl() {
-  let yearUrl = 'http://www.imdb.com/year/';
-  let inputYear = document.getElementById('inputYear').value;
+  let inputYear = $('#inputYear').val();
   let errorMess = $('.errorMess');
-  document.getElementById('inputYear').value = '';
+  let noQuerryMess = $('.noQueryMess');
+  $('#inputYear').val('');
+
   if (isNaN(Number(inputYear)) || inputYear.length === 0) {
-    errorMess.text("Please input a valid year");
-    errorMess.slideDown("slow");
+    errorMess
+      .text('Please input a valid year')
+      .slideDown('slow');
   }
   else if (inputYear < minYear || inputYear > maxYear) {
-    errorMess.text("Oh Snap! Year is not in range (min: 1950, max: 2030)");
-    errorMess.slideDown("slow");
+    errorMess
+      .text('Oh Snap! Year is not in range (min: 1950, max: 2030)')
+      .slideDown('slow');
   }
   else {
-    $(".errorMess").css("display", "none");
-    $(".noQueryMess").css("display", "none");
-    document.querySelector('.movies').innerHTML = '';
-    $('.loader').fadeIn('medium');
-    document.getElementById('movieYear').innerHTML = inputYear;
-    yearUrl = `${yearUrl}${inputYear}`;
-    let fullUrl = `${proxy}${yearUrl}`;
-    listTopMovies(fullUrl);
+    errorMess.css('display', 'none');
+    noQuerryMess.css('display', 'none');
+    $('.movies').empty();
+    $('.loader').fadeIn('fast');
+    $('#movieYear').val(inputYear);
+    listTopMovies(fullUrl(inputYear));
   }
 }
 
@@ -76,54 +78,43 @@ function parseHtml(html) {
   return parser.parseFromString(html, 'text/html');
 }
 
-function findOne($context, selector) {
-  return $context.querySelector(selector) || {textContent: ''};
-}
-
 function getMovies($doc) {
-  let $row = $doc.querySelectorAll('table.results tr');
-  return map($row, parseMovie);
+  let $rows = $($doc).find('table.results tr');
+  return $rows.map((_, el) => parseMovie($(el))).get();
 }
 
 function parseMovie($row) {
-  let title = findOne($row, 'td.title > a').textContent.trim();
-  let titleUrl = findOne($row, 'td.title > a').getAttribute('href');
-  let rating = parseFloat(findOne($row, 'span.rating-rating').textContent.trim().split('/')[0]) || undefined;
-  let desc = findOne($row, 'span.outline').textContent.trim();
-  let imgUrl = findOne($row, '.image img').getAttribute('src');
-  let genre = findOne($row, '.title .genre').textContent.trim();
+  let title = $($row).find('td.title > a').text().trim();
+  let titleUrl = $($row).find('td.title > a').attr('href');
+  let rating = parseFloat($($row).find('span.rating-rating').text().trim().split('/')[0]) || undefined;
+  let desc = $($row).find('span.outline').text().trim();
+  let imgUrl = $($row).find('.image img').attr('src');
+  let genre = $($row).find('.title .genre').text().trim();
 
-  return {
-    title,
-    titleUrl,
-    rating,
-    desc,
-    imgUrl,
-    genre
-  }
+  return { title, titleUrl, rating, desc, imgUrl, genre };
 }
 
 function renderMovie($output, movie) {
   const movieUrl = `http://www.imdb.com${movie.titleUrl}`;
-  let html = `<a href = ${movieUrl} target="_blank" class = "movie list-group-item list-group-item:hover">
-               <div class="title"><span>${movie.title}</span></div> 
-                   <img src="${movie.imgUrl}" alt="">
-                   <span class = "content-right">
-                       <div class="rating">${movie.rating || 'not rated' } <span class="glyphicon glyphicon-star"></span></div> 
-                       <div class="desc">${movie.desc}</div>
-                       <div class="genre">${movie.genre}</div>
+  let html = `<a href = ${movieUrl} target='_blank' class = 'movie list-group-item list-group-item:hover'>
+               <div class='title'><span>${movie.title}</span></div> 
+                   <img src='${movie.imgUrl}' alt=''>
+                   <span class = 'content-right'>
+                       <div class='rating'>${movie.rating || 'not rated' } <span class='glyphicon glyphicon-star'></span></div> 
+                       <div class='desc'>${movie.desc}</div>
+                       <div class='genre'>${movie.genre}</div>
                    </span>
                 </a>`;
-  $output.innerHTML += html;
+  $output.append(html);
 }
 
 function renderMovies(movies) {
-  let $output = document.querySelector('.movies');
-  $output.innerHTML = '';
+  let $output = $('.movies');
+  $output.empty();
   movies.forEach(movie => renderMovie($output, movie));
 }
 $('.loader').fadeIn('medium');
-listTopMovies(proxiedUrl());
+listTopMovies(fullUrl(defaultYear));
 
 
 

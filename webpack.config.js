@@ -9,12 +9,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: [
     'bootstrap-loader',
-    './index.js'
+    './src'
   ],
   devtool: "eval",
   output: {
     filename: 'bundle.js',
-    path: './dist'
+    //TODO: Resolve path using some library
+    path: '/Users/engine/projects/ScrapeNow/dist'
   },
   module: {
     rules: [
@@ -38,7 +39,7 @@ module.exports = {
         })
       },
       {
-        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
         use: 'imports-loader?jQuery=jquery'
       },
       {

@@ -159,14 +159,14 @@ a.list-group-item:hover {
 }
 
 footer {
-  background: $titles-color555;
+  background: $titles-color;
   height: 50px;
   width: 100%;
   position: fixed;
   bottom: 0;
 
   p {
-    color: $primary-background-colorfff;
+    color: $primary-background-color;
     font-family: inherit;
     text-align: center;
     padding-top: 16px;

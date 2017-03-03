@@ -1,9 +1,5 @@
 import $ from 'jquery';
-
-const proxy = 'https://cors.now.sh/';
-const maxYear = 2050;
-const minYear = 1950;
-const defaultYear = (new Date()).getFullYear();
+import { proxy, minYear, maxYear, defaultYear } from './config';
 
 function parseHtml(html) {
   let parser = new DOMParser();

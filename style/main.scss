@@ -78,10 +78,10 @@ a.list-group-item:hover {
   display: block;
   margin: 0 auto;
   width: 200px;
-}
 
-#inputYear:focus {
-  box-shadow: inset 0 -2px 0 #32c1e0;
+  &:focus {
+    box-shadow: inset 0 -2px 0 #32c1e0;
+  }
 }
 
 .search {
@@ -110,39 +110,39 @@ a.list-group-item:hover {
     display: block;
     padding: 20px;
     margin-bottom: 20px;
-  }
 
-  .movie .title {
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 15px;
+    .title {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 15px;
 
-    a {
-      text-decoration: none;
-      color: #008b8b;
+      a {
+        text-decoration: none;
+        color: #008b8b;
+      }
     }
-  }
 
-  .rating {
-    color: #26a4c0;
-    margin-bottom: 4px;
-  }
-
-  .content-right {
-    display: inline-block;
-    min-height: 110px;
-    margin-left: 20px;
-    width: 75%;
-
-    .genre {
-      margin-top: 10px;
+    .rating {
       color: #26a4c0;
+      margin-bottom: 4px;
     }
-  }
 
-  img {
-    float: left;
-    width: 80px;
+    .content-right {
+      display: inline-block;
+      min-height: 110px;
+      margin-left: 20px;
+      width: 75%;
+
+      .genre {
+        margin-top: 10px;
+        color: #26a4c0;
+      }
+    }
+
+    img {
+      float: left;
+      width: 80px;
+    }
   }
 }
 

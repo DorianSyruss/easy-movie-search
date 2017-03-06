@@ -1,12 +1,16 @@
 /**
  * Created by engine on 22/02/2017.
  */
+'use strict';
+
 require('./../style/main.scss');
 
 import 'whatwg-fetch';
 import $ from 'jquery';
 import Movies from './Movies';
 import Utils from './Utils';
+
+const enterKeyCode = 13;
 
 let sendInput = $('#sendInput');
 sendInput.on('click', () => {
@@ -19,7 +23,7 @@ sendInput.on('click', () => {
 
 let inputYear = $('#inputYear');
 inputYear.keyup(function (event) {
-  if (event.keyCode == 13) {
+  if (event.keyCode === enterKeyCode) {
     sendInput.click();
   }
 });

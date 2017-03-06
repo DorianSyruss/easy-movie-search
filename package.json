@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --display-modules",
-    "dev": "webpack-dev-server --port 5656 --content-base ./dist/"
+    "build": "webpack -p --config ./webpack.config.js --display-modules",
+    "dev": "webpack-dev-server --port 3000 --content-base ./dist/"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
+    "url-join": "^1.1.0",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {

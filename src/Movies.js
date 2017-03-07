@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-let urljoin = require('url-join');
+let urlJoin = require('url-join');
 
 let findInContext = function($context, selector) {
   return $context.find(selector);
@@ -19,7 +19,7 @@ function parseMovie($row) {
 }
 
 function renderMovie($output, movie) {
-  const movieUrl = urljoin('http://www.imdb.com', movie.titleUrl);
+  const movieUrl = urlJoin('http://www.imdb.com', movie.titleUrl);
   let html = `
     <a href = ${movieUrl} target='_blank' class = 'movie list-group-item list-group-item:hover'>
       <div class='title'><span>${movie.title}</span></div> 
@@ -30,17 +30,21 @@ function renderMovie($output, movie) {
         <div class='genre'>${movie.genre}</div>
       </span>
     </a>`;
-
   $output.append(html);
 }
 
-module.exports.get = function($doc) {
+function get($doc) {
   let $rows = $($doc).find('table.results tr');
   return $rows.map((_, el) => parseMovie($(el))).get();
-};
+}
 
-module.exports.render = function(movies) {
+function render(movies) {
   let $output = $('.movies');
   $output.empty();
   movies.forEach(movie => renderMovie($output, movie));
+}
+
+module.exports = {
+  get,
+  render
 };

@@ -2,50 +2,54 @@
 
 import $ from 'jquery';
 import { proxy, minYear, maxYear, defaultYear } from './config';
-let urljoin = require('url-join');
+let urlJoin = require('url-join');
 
 function parseHtml(html) {
   let parser = new DOMParser();
   return parser.parseFromString(html, 'text/html');
 }
 
-module.exports.fetchDocument = function(url) {
+function fetchDocument(url) {
   return fetch(url)
     .then(response => response.json())
     .then(html => parseHtml(html))
-};
+}
 
-module.exports.parseInput = function() {
-  let year = $('#inputYear').val();
+function errorMsg(year) {
   let errorMsg = $('.errorMsg');
-  let noQuerryMsg = $('.noQueryMess');
-  $('#inputYear').val('');
-
+  let noQuerryMsg = $('.noQueryMsg');
   if (isNaN(Number(year)) || year.length === 0) {
     errorMsg
       .text('Please input a valid year')
       .slideDown('fast');
-    return '';
   }
-  else if (year < minYear || year > maxYear) {
+  else if (Number(year) < minYear || Number(year) > maxYear) {
     errorMsg
       .text('Oh Snap! Year is not in range (min: 1950, max: 2030)')
-      .slideDown('slow');
-    return '';
+      .slideDown('fast');
   }
   else {
     errorMsg.css('display', 'none');
     noQuerryMsg.css('display', 'none');
-    $('.movies').empty();
-    $('.loader').fadeIn('fast');
-    console.log(year);
-    $('#movieYear').text(year);
-    return year;
   }
+}
+
+function parseInput() {
+  let year = $('#inputYear').val();
+  $('#inputYear').val('');
+  errorMsg(year);
+  $('.movies').empty();
+  $('.loader').fadeIn('fast');
+  $('#movieYear').text(year);
+  return year;
+}
+
+function fullUrl(year = defaultYear) {
+  return urlJoin(proxy, 'http://www.imdb.com/year/', year)
+}
+
+module.exports = {
+  fetchDocument,
+  parseInput,
+  fullUrl
 };
-
-module.exports.fullUrl = function(year = defaultYear) {
-  return urljoin(proxy, 'http://www.imdb.com/year/', year)
-};
-
-

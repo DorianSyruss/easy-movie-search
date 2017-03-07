@@ -1,31 +1,34 @@
 'use strict';
 
 import $ from 'jquery';
-let urlJoin = require('url-join');
+import { baseUrl } from './config';
+import urlJoin from 'url-join';
 
-let findInContext = function($context, selector) {
-  return $context.find(selector);
-};
+function getText($context, selector) {
+  return $context.find(selector).text().trim();
+}
+function getAttribute($context, selector, attr) {
+  return $context.find(selector).attr(attr);
+}
 
 function parseMovie($row) {
-  let title = findInContext($row, 'td.title > a').text().trim();
-  let titleUrl = findInContext($row, 'td.title > a').attr('href');
-  let rating = parseFloat($row.find('span.rating-rating').text().trim().split('/')[0]) || undefined;
-  let desc = findInContext($row, 'span.outline').text().trim();
-  let imgUrl = findInContext($row, '.image img').attr('src');
-  let genre = findInContext($row, '.title .genre').text().trim();
+  let title = getText($row, 'td.title > a');
+  let url = getAttribute($row, 'td.title > a', 'href');
+  let rating = parseFloat(getText($row, 'span.rating-rating').split('/')[0]) || undefined;
+  let desc = getText($row, 'span.outline');
+  let imgUrl = getAttribute($row, '.image img', 'src');
+  let genre = getText($row, '.title .genre');
 
-  return { title, titleUrl, rating, desc, imgUrl, genre };
+  return { title, url, rating, desc, imgUrl, genre };
 }
 
 function renderMovie($output, movie) {
-  const movieUrl = urlJoin('http://www.imdb.com', movie.titleUrl);
   let html = `
-    <a href = ${movieUrl} target='_blank' class = 'movie list-group-item list-group-item:hover'>
+    <a href=${ urlJoin(baseUrl, movie.url) } target="_blank" class='movie list-group-item list-group-item:hover'>
       <div class='title'><span>${movie.title}</span></div> 
       <img src='${movie.imgUrl}' alt=''>
       <span class = 'content-right'>
-        <div class='rating'>${movie.rating || 'not rated' } <span class='glyphicon glyphicon-star'></span></div> 
+        <div class='rating'>${movie.rating || 'not rated' }<span class='glyphicon glyphicon-star'></span></div> 
         <div class='desc'>${movie.desc}</div>
         <div class='genre'>${movie.genre}</div>
       </span>
@@ -33,18 +36,9 @@ function renderMovie($output, movie) {
   $output.append(html);
 }
 
-function get($doc) {
-  let $rows = $($doc).find('table.results tr');
+function parseMovies(doc) {
+  let $rows = $(doc).find('table.results tr');
   return $rows.map((_, el) => parseMovie($(el))).get();
 }
 
-function render(movies) {
-  let $output = $('.movies');
-  $output.empty();
-  movies.forEach(movie => renderMovie($output, movie));
-}
-
-module.exports = {
-  get,
-  render
-};
+module.exports = { parseMovies, renderMovie };

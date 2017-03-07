@@ -20,6 +20,9 @@ function createError(code, msg) {
 }
 
 function parseYear(input) {
+  if (!input) {
+    return [createError(Error.NO_INPUT, 'Invalid input!')];
+  }
   let year = Number(input);
   if (isNaN(year)) {
     return [createError(Error.INVALID_INPUT ,'Invalid year!')];

@@ -14,8 +14,9 @@ const ENTER = 13;
 
 // flash errors
 const messages = {
-  [Error.INVALID_INPUT]: 'prva',
-  [Error.OUT_OF_RANGE]: 'druga',
+  [Error.INVALID_INPUT]: 'Please enter a valid year',
+  [Error.NO_INPUT]: 'Please enter a valid year',
+  [Error.OUT_OF_RANGE]: 'Year is out of range ( 1950 - 2030 )',
   [Error.NO_RESULTS]: 'Oh Snap! No Queries Matched... Please try again!'
 };
 
@@ -34,9 +35,13 @@ $yearField.keyup(e => {
   listTopMovies(readYear());
 });
 
+function setDisabled($input, disabled=true) {
+  $input.prop('disabled', disabled);
+}
+
 // initial rendering
 $loader.fadeIn('medium');
-listTopMovies();
+listTopMovies((new Date()).getFullYear());
 
 
 function readYear() {
@@ -48,7 +53,7 @@ function readYear() {
 const flashMessage = err => messages[err.code || 'default'];
 
 function listTopMovies(input) {
-  input = input || (new Date()).getFullYear();
+  setDisabled($yearField);
   let [ err, year ] = parseYear(input);
 
   // reset ui
@@ -62,6 +67,7 @@ function listTopMovies(input) {
       .text(flashMessage(err))
       .slideDown('fast');
 
+    setDisabled($yearField, false);
     return;
   }
 
@@ -73,6 +79,7 @@ function listTopMovies(input) {
   fetchMovies(year)
     .then(movies => {
       $loader.fadeOut('fast');
+      setDisabled($yearField, false);
 
       // update movie list
       if (movies.length !== 0) {

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en" style="
+    /* overflow-y: scroll; */
+"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="./ScrapeMovies_files/css" rel="stylesheet">
+  <link href="./ScrapeMovies_files/css(1)" rel="stylesheet">
+  
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ScrapeMovies</title>
+<link href="./ScrapeMovies_files/style.css" rel="stylesheet"></head>
+  <body>
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="./ScrapeMovies_files/imdb_pro.png"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-middle">
+            <li class="active"><a href="http://localhost:3000/#">Home</a></li>
+            <li><a href="http://localhost:3000/#">Link</a></li>
+            <li class="dropdown">
+              <a href="http://localhost:3000/#" class="dropdown-toggle" data-toggle="dropdown">Something<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Something Useful</li>
+                <li><a href="http://localhost:3000/#">Link1</a></li>
+                <li><a href="http://localhost:3000/#">Link2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h1> MOST POPULAR MOVIES RELEASED IN <span id="yearTitle">2012</span></h1>
+      <div class="search input-group">
+        <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
+        <span class="input-group-btn">
+        <button id="btnList" class="btn btn-primary" type="button">Search</button>
+      </span>
+      </div>
+      <div class="messageBoard">
+        <div class="flash-message .error" style="display: none;">Year is out of range ( 1950 - 2030 )</div>
+      </div>
+      <ul class="movies list-group">
+    <a href="http://www.imdb.com/title/tt1446714/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>Prometheus</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTY3NzIyNTA2NV5BMl5BanBnXkFtZTcwNzE2NjI4Nw@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Following clues to the origin of mankind, a team find a structure on a distant moon, but they soon find they are not alone.</div>
+        <div class="genre">Adventure | Mystery | Sci-Fi</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1345836/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>The Dark Knight Rises</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">8.5<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Eight years after the Joker's reign of anarchy, the Dark Knight, with the help of the enigmatic Selina, is forced from his imposed exile to save Gotham City, now on the edge of total annihilation, from the brutal guerrilla terrorist Bane.</div>
+        <div class="genre">Action | Thriller</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1707386/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>Les Misérables</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTQ4NDI3NDg4M15BMl5BanBnXkFtZTcwMjY5OTI1OA@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.6<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">In 19th-century France, Jean Valjean, who for decades has been hunted by the ruthless policeman Javert after breaking parole, agrees to care for a factory worker's daughter. The decision changes their lives forever.</div>
+        <div class="genre">Drama | Musical | Romance</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1392170/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>The Hunger Games</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMjA4NDg3NzYxMF5BMl5BanBnXkFtZTcwNTgyNzkyNw@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.2<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Katniss Everdeen voluntarily takes her younger sister's place in the Hunger Games, a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.</div>
+        <div class="genre">Action | Adventure | Sci-Fi | Thriller</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1853728/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>Django Unchained</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">8.4<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.</div>
+        <div class="genre">Drama | Western</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1817273/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>The Place Beyond the Pines</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMjc1OTEwNjU4N15BMl5BanBnXkFtZTcwNzUzNDIwOQ@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.3<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">A motorcycle stunt rider turns to robbing banks as a way to provide for his lover and their newborn child, a decision that puts him on a collision course with an ambitious rookie cop navigating a department ruled by a corrupt detective.</div>
+        <div class="genre">Crime | Drama | Thriller</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt0848228/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>The Avengers</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">8.1<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity.</div>
+        <div class="genre">Action | Sci-Fi</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt0903624/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>The Hobbit: An Unexpected Journey</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTcwNTE4MTUxMl5BMl5BanBnXkFtZTcwMDIyODM4OA@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.9<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.</div>
+        <div class="genre">Adventure | Fantasy</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1981677/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>Pitch Perfect</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTcyMTMzNzE5N15BMl5BanBnXkFtZTcwNzg5NjM5Nw@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.2<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Beca, a freshman at Barden University, is cajoled into joining The Bellas, her school's all-girls singing group. Injecting some much needed energy into their repertoire, The Bellas take on their male rivals in a campus competition.</div>
+        <div class="genre">Comedy | Music | Romance</div>
+      </span>
+    </a>
+    <a href="http://www.imdb.com/title/tt1024648/" target="_blank" class="movie list-group-item">
+      <div class="title"><span>Argo</span></div> 
+      <img src="./ScrapeMovies_files/MV5BMTc3MjI0MjM0NF5BMl5BanBnXkFtZTcwMTYxMTQ1OA@@._V1._SX54_CR0,0,54,74_.jpg" alt="">
+      <span class="content-right">
+        <div class="rating">7.7<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">Acting under the cover of a Hollywood producer scouting a location for a science fiction film, a CIA agent launches a dangerous operation to rescue six Americans in Tehran during the U.S. hostage crisis in Iran in 1980.</div>
+        <div class="genre">Biography | Drama | History | Thriller</div>
+      </span>
+    </a></ul>
+      <div class="loader" style="display: none;"></div>
+    </div>
+    <footer><p>Made by Ivan Saric, All rights reserved 2017</p></footer>
+  </div>
+  <script type="text/javascript" src="./ScrapeMovies_files/bundle.js"></script>
+
+</body></html>

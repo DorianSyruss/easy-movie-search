@@ -20,13 +20,21 @@ const messages = {
   [Error.NO_RESULTS]: 'Oh Snap! No Queries Matched... Please try again!'
 };
 
+class Loader {
+  constructor(loader){
+    this.$loader = $(loader);
+  }
+  start() {this.$loader.fadeIn('fast')};
+  stop () {this.$loader.fadeOut('fast')};
+}
+
 // ui elements
 const $btnList = $('#btnList');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
-const $loader = $('.loader');
 const $flashMessage = $('.flash-message');
+const loader = new Loader('.loader');
 
 // wire-up event listeners
 $btnList.click(() => listTopMovies(readYear()));
@@ -40,7 +48,7 @@ function setDisabled($input, disabled=true) {
 }
 
 // initial rendering
-$loader.fadeIn('medium');
+loader.start();
 listTopMovies((new Date()).getFullYear());
 
 
@@ -75,10 +83,10 @@ function listTopMovies(input) {
   $yearTitle.text(year);
 
   // fetch movies
-  $loader.fadeIn('fast');
+  loader.start();
   fetchMovies(year)
     .then(movies => {
-      $loader.fadeOut('fast');
+      loader.stop();
       setDisabled($yearField, false);
 
       // update movie list

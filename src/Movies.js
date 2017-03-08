@@ -24,13 +24,13 @@ function parseMovie($row) {
 
 function renderMovie($output, movie) {
   let html = `
-    <a href=${ urlJoin(baseUrl, movie.url) } target="_blank" class='movie list-group-item list-group-item:hover'>
-      <div class='title'><span>${movie.title}</span></div> 
-      <img src='${movie.imgUrl}' alt=''>
-      <span class = 'content-right'>
-        <div class='rating'>${movie.rating || 'not rated' }<span class='glyphicon glyphicon-star'></span></div> 
-        <div class='desc'>${movie.desc}</div>
-        <div class='genre'>${movie.genre}</div>
+    <a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item">
+      <div class="title"><span>${movie.title}</span></div> 
+      <img src="${movie.imgUrl}" alt="">
+      <span class = "content-right">
+        <div class="rating">${movie.rating || "not rated" }<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="desc">${movie.desc}</div>
+        <div class="genre">${movie.genre}</div>
       </span>
     </a>`;
   $output.append(html);

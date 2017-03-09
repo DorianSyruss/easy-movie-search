@@ -12,14 +12,18 @@ function getAttribute($context, selector, attr) {
 }
 
 function parseMovie($row) {
-  let title = getText($row, 'td.title > a');
+  console.log($row);
+  let title = getText($row, '.lister-item-header a');
   let url = getAttribute($row, 'td.title > a', 'href');
-  let rating = parseFloat(getText($row, 'span.rating-rating').split('/')[0]) || undefined;
+  let rating = parseFloat(getText($row, '.ratings-bar strong').split('/')[0]) || undefined;
+  let metascore = parseFloat(getText($row, '.ratings-metascore span').split('/')[0]) || undefined;
   let desc = getText($row, 'span.outline');
-  let imgUrl = getAttribute($row, '.image img', 'src');
+  let imgUrl = getAttribute($row, '.lister-item-image img', 'loadlate');
+  console.log(imgUrl);
   let genre = getText($row, '.title .genre');
 
-  return { title, url, rating, desc, imgUrl, genre };
+
+  return { title, url, rating, metascore, desc, imgUrl, genre };
 }
 
 function renderMovie($output, movie) {
@@ -29,6 +33,7 @@ function renderMovie($output, movie) {
       <img src="${movie.imgUrl}" alt="">
       <span class = "content-right">
         <div class="rating">${movie.rating || "not rated" }<span class="glyphicon glyphicon-star"></span></div> 
+        <div class="metascore">${movie.metascore || "not rated" }<span> Metascore</span></div>
         <div class="desc">${movie.desc}</div>
         <div class="genre">${movie.genre}</div>
       </span>
@@ -37,7 +42,7 @@ function renderMovie($output, movie) {
 }
 
 function parseMovies(doc) {
-  let $rows = $(doc).find('table.results tr');
+  let $rows = $(doc).find('#main .article .lister-item');
   return $rows.map((_, el) => parseMovie($(el))).get();
 }
 

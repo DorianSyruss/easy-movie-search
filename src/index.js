@@ -104,8 +104,8 @@ function listTopMovies(input) {
 }
 
 function fetchMovies(year) {
-  let url = urlJoin(proxyUrl, baseUrl, '/year/', year);
+  let url = urlJoin(proxyUrl, baseUrl, 'search/title?', '/year=/', year, '&view=advanced', '&view=advanced&page=1', '&sort=moviemeter,asc' );
+  console.log(url);
   return fetchDocument(url).then(doc => parseMovies(doc));
 }
-
 

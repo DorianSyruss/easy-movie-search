@@ -11,6 +11,10 @@ body {
   overflow-y: scroll;
 }
 
+.glyphicon {
+    left: 2px;
+  }
+
 .content-wrapper {
   background: $primary-background-color;
   padding-bottom: 20px;
@@ -127,8 +131,15 @@ a.list-group-item:hover {
     }
 
     .rating {
+      display: inline-block;
       color: #26a4c0;
       margin-bottom: 4px;
+    }
+
+    .metascore {
+      display: inline-block;
+      margin-left: 5px;
+      color: #26a4c0;
     }
 
     .content-right {
@@ -199,16 +210,16 @@ footer {
 
 @media only screen and (max-width: 550px) {
   .movies img {
-    float: none;
+    float: none !important;
     display: block;
     margin: 0 auto;
   }
 
   .movies .content-right {
     display: block;
-    width: 100%;
+    width: 100% !important;
     margin-top: 10px;
-    margin-left: 0;
+    margin-left: 0 !important;
     text-align: center;
 
     h1 {

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
@@ -7,7 +7,7 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ScrapeMovies</title>
+  <title>IMDBPro</title>
 </head>
   <body>
   <div class="content-wrapper">
@@ -16,24 +16,12 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="assets/img/imdb_pro.png"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-middle">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Something<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">Something Useful</li>
-                <li><a href="#">Link1</a></li>
-                <li><a href="#">Link2</a></li>
-              </ul>
-            </li>
           </ul>
         </div>
       </div>
@@ -50,7 +38,7 @@
       <ul class="movies list-group"></ul>
       <div class="loader"></div>
     </div>
-    <footer><p>Made by Ivan Saric, All rights reserved 2017</p></footer>
+    <footer><p>Made by {{ author }}, All rights reserved {{ year }}</p></footer>
   </div>
   </body>
 </html>

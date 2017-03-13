@@ -198,13 +198,13 @@ footer {
 }
 
 @media only screen and (max-width: 550px) {
-  .movies img {
+  .movies .movie img {
     float: none;
     display: block;
     margin: 0 auto;
   }
 
-  .movies .content-right {
+  .movies .movie .content-right {
     display: block;
     width: 100%;
     margin-top: 10px;

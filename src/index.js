@@ -21,11 +21,9 @@ const messages = {
 };
 
 class Loader {
-  constructor(loader){
-    this.$loader = $(loader);
-  }
-  start() {this.$loader.fadeIn('fast')};
-  stop () {this.$loader.fadeOut('fast')};
+  constructor(el){ this.$el = $(el); }
+  start() { this.$el.fadeIn('fast'); }
+  stop () { this.$el.fadeOut('fast'); }
 }
 
 // ui elements
@@ -107,5 +105,3 @@ function fetchMovies(year) {
   let url = urlJoin(proxyUrl, baseUrl, '/year/', year);
   return fetchDocument(url).then(doc => parseMovies(doc));
 }
-
-

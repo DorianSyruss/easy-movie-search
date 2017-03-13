@@ -16,7 +16,7 @@ module.exports = {
   devtool: "eval",
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.join(__dirname, 'dist')
   },
   module: {
     rules: [{
@@ -80,4 +80,3 @@ module.exports = {
     })
   ]
 };
-

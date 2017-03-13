@@ -52,10 +52,12 @@ body {
   float: none;
   width: 600px;
   margin: 0 auto;
+  text-align: center;
 
   li {
-    width: 200px;
-    text-align: center;
+    display: block;
+    float: none;
+    margin: 0 auto;
 
     a {
       color: #26a4c0;

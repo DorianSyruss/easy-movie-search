@@ -12,8 +12,8 @@ body {
 }
 
 .glyphicon {
-    left: 2px;
-  }
+  left: 2px;
+}
 
 .content-wrapper {
   background: $primary-background-color;
@@ -209,13 +209,13 @@ footer {
 }
 
 @media only screen and (max-width: 550px) {
-  .movies img {
-    float: none !important;
+  .movies .movie img {
+    float: none;
     display: block;
     margin: 0 auto;
   }
 
-  .movies .content-right {
+  .movies .movie .content-right {
     display: block;
     width: 100% !important;
     margin-top: 10px;

@@ -1,9 +1,11 @@
 'use strict';
 
+const author = require('./package.json').author;
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlStringReplace = require('html-string-replace-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -14,7 +16,7 @@ module.exports = {
   devtool: "eval",
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.join(__dirname, 'dist')
   },
   module: {
     rules: [{
@@ -59,6 +61,17 @@ module.exports = {
       from: 'assets',
       to: 'assets'
     }]),
+    new HtmlStringReplace({
+      enable: true,
+      patterns: [{
+          match: /\{\{\s*(\w*)\s*}}/g,
+          replacement(_, key) {
+            if (key === 'author') return author;
+            if (key === 'year') return (new Date()).getFullYear();
+            return '';
+          }
+      }]
+    }),
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -67,4 +80,3 @@ module.exports = {
     })
   ]
 };
-

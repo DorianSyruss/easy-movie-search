@@ -21,11 +21,9 @@ const messages = {
 };
 
 class Loader {
-  constructor(loader){
-    this.$loader = $(loader);
-  }
-  start() {this.$loader.fadeIn('fast')};
-  stop () {this.$loader.fadeOut('fast')};
+  constructor(el){ this.$el = $(el); }
+  start() { this.$el.fadeIn('fast'); }
+  stop () { this.$el.fadeOut('fast'); }
 }
 
 // ui elements
@@ -108,4 +106,3 @@ function fetchMovies(year) {
   console.log(url);
   return fetchDocument(url).then(doc => parseMovies(doc));
 }
-

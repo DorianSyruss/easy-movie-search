@@ -13,6 +13,7 @@ body {
 
 .glyphicon {
   left: 2px;
+  color: #efbe4b;
 }
 
 .content-wrapper {
@@ -130,27 +131,19 @@ a.list-group-item:hover {
       }
     }
 
-    .rating {
-      display: inline-block;
-      color: #26a4c0;
-      margin-bottom: 4px;
-    }
-
-    .metascore {
-      display: inline-block;
-      margin-left: 5px;
-      color: #26a4c0;
-    }
-
     .content-right {
       display: inline-block;
       min-height: 110px;
       margin-left: 20px;
       width: 75%;
+    }
 
-      .genre {
-        margin-top: 10px;
-        color: #26a4c0;
+    .movie-details {
+      padding-left: 0;
+
+      li {
+        display: inline-block;
+        padding: 0 5px;
       }
     }
 

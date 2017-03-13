@@ -4,25 +4,32 @@ import $ from 'jquery';
 import { baseUrl } from './config';
 import urlJoin from 'url-join';
 
-function getText($context, selector) {
-  return $context.find(selector).text().trim();
-}
+
 function getAttribute($context, selector, attr) {
   return $context.find(selector).attr(attr);
 }
 
+function getText($context, selector) {
+  return $context.find(selector).text().trim();
+}
+
+function getSpecificContentArray($context, selector, i) {
+  return $($context.find(selector)[i]).text().trim();
+}
+
+
 function parseMovie($row) {
   let title = getText($row, '.lister-item-header a');
-  let url = getAttribute($row, 'td.title > a', 'href');
+  let url = getAttribute($row, '.lister-item-header a', 'href');
   let rating = parseFloat(getText($row, '.ratings-bar strong').split('/')[0]) || undefined;
   let metascore = parseFloat(getText($row, '.ratings-metascore span').split('/')[0]) || undefined;
   let runtime = parseFloat(getText($row, '.text-muted .runtime').split('/')[0]) || undefined;
-  let desc = getText($row, 'span.outline');
+  let desc = getSpecificContentArray($row, '.text-muted', 2); //Used when there is no specific class on element
   let imgUrl = getAttribute($row, '.lister-item-image img', 'loadlate');
   let genre = getText($row, '.text-muted .genre');
+  let votes = getSpecificContentArray($row, '.sort-num_votes-visible span', 1);
 
-
-  return { title, url, rating, metascore, runtime, desc, imgUrl, genre };
+  return { title, url, rating, metascore, runtime, desc, imgUrl, genre, votes };
 }
 
 function renderMovie($output, movie) {
@@ -34,10 +41,11 @@ function renderMovie($output, movie) {
         <ul class="movie-details">
           <li class="rating">${movie.rating || "not rated" }<span class="glyphicon glyphicon-star"></span></li> 
           <li class="metascore">${movie.metascore || "not rated" }<span> Metascore</span></li>
-          <li class="runtime">${movie.runtime + " min" || "x: min"}</>
+          <li class="runtime">${movie.runtime + " min" || "unknown: min"}</li>
           <li class="genre">${movie.genre}</li>
         </ul>
           <div class="desc">${movie.desc}</div>
+          <div class="votes">${"Votes: " + movie.votes}</div>
       </span>
     </a>`;
   $output.append(html);

@@ -35,5 +35,5 @@ function parseYear(input) {
 
 module.exports = {
   fetchDocument,
-  parseYear
+  parseYear,
 };

@@ -63,8 +63,8 @@ styles:
   navs: true
   navbar: true
   breadcrumbs: true
-  pagination: false
-  pager: false
+  pagination: true
+  pager: true
   labels: true
   badges: true
   jumbotron: false

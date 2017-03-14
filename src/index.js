@@ -7,7 +7,7 @@ import $ from 'jquery';
 import urlJoin from 'url-join';
 import './errors';
 import { parseMovies, renderMovie } from './Movies';
-import { fetchDocument, parseYear } from './Utils';
+import { fetchDocument, parseYear, showPagination } from './Utils';
 import { proxyUrl, baseUrl } from './config';
 
 const ENTER = 13;
@@ -28,17 +28,43 @@ class Loader {
 
 // ui elements
 const $btnList = $('#btnList');
+const $btnPrev = $('.button-previous');
+const $btnNext = $('.button-next');
+const $pagination = $('.sn-pagination');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
+const query = {
+  sortBy: 'moviemeter',
+  year: (new Date()).getFullYear(),
+  page: 1
+};
+
 
 // wire-up event listeners
-$btnList.click(() => listTopMovies(readYear()));
+$btnList.click(() => {
+  query.page = 1;
+  listTopMovies(readYear())
+});
+
 $yearField.keyup(e => {
   if (e.keyCode !== ENTER) return;
+  query.page = 1;
   listTopMovies(readYear());
+});
+
+$btnPrev.click(() => {
+  if(query.page > 1){
+    query.page--;
+    listTopMovies(query.year);
+  }
+});
+
+$btnNext.click(() => {
+  query.page++;
+  listTopMovies(query.year);
 });
 
 function setDisabled($input, disabled=true) {
@@ -47,8 +73,7 @@ function setDisabled($input, disabled=true) {
 
 // initial rendering
 loader.start();
-listTopMovies((new Date()).getFullYear());
-
+listTopMovies(query.year);
 
 function readYear() {
   let year = $yearField.val();
@@ -77,16 +102,18 @@ function listTopMovies(input) {
     return;
   }
 
+  // set query params
+  query.year = year;
+
   // update title
-  $yearTitle.text(year);
+  $yearTitle.text(query.year);
 
   // fetch movies
   loader.start();
-  fetchMovies(year)
+  fetchMovies()
     .then(movies => {
       loader.stop();
       setDisabled($yearField, false);
-
       // update movie list
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
@@ -101,8 +128,7 @@ function listTopMovies(input) {
     });
 }
 
-function fetchMovies(year) {
-  let url = urlJoin(proxyUrl, baseUrl, 'search/title', `?year=${year}`, '&title_type=feature', '&sort=moviemeter,asc', '&page=1');
-  console.log(url);
+function fetchMovies() {
+  let url = urlJoin(proxyUrl, baseUrl, 'search/title', `?year=${query.year}`, '&title_type=feature', `&sort=${query.sort},asc`, `&page=${query.page}`);
   return fetchDocument(url).then(doc => parseMovies(doc));
 }

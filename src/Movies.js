@@ -52,7 +52,7 @@ function renderMovie($output, movie) {
 }
 
 function parseMovies(doc) {
-  let $rows = $(doc).find('#main .article .lister-item');
+  let $rows = $(doc).find('#main .article .lister-list .lister-item');
   return $rows.map((_, el) => parseMovie($(el))).get();
 }
 

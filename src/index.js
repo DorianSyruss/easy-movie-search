@@ -5,10 +5,11 @@ require('./../style/main.scss');
 import 'whatwg-fetch';
 import $ from 'jquery';
 import urlJoin from 'url-join';
+import queryString from 'querystring';
 import './errors';
-import { parseMovies, renderMovie } from './Movies';
-import { fetchDocument, parseYear, showPagination } from './Utils';
-import { proxyUrl, baseUrl } from './config';
+import { parseMovies, renderMovie, parseMovieCount, renderMovieCount } from './Movies';
+import { fetchDocument, parseYear } from './Utils';
+import { proxyUrl, baseUrl, maxDisplayCount} from './config';
 
 const ENTER = 13;
 
@@ -34,6 +35,7 @@ const $pagination = $('.sn-pagination');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
+const $movieCount = $('.movie-count');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
 const query = {
@@ -84,11 +86,13 @@ function readYear() {
 const flashMessage = err => messages[err.code || 'default'];
 
 function listTopMovies(input) {
+  $pagination.hide();
   setDisabled($yearField);
   let [ err, year ] = parseYear(input);
 
   // reset ui
   $movieList.empty();
+  $movieCount.empty();
   $flashMessage.hide();
 
   // show error on invalid input
@@ -110,13 +114,20 @@ function listTopMovies(input) {
 
   // fetch movies
   loader.start();
-  fetchMovies()
-    .then(movies => {
+  fetchData()
+    .then(([movies, movieCount]) => {
       loader.stop();
       setDisabled($yearField, false);
       // update movie list
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
+        renderMovieCount($movieCount, movieCount, maxDisplayCount, query.page);
+        if( movieCount.total > maxDisplayCount ) {
+          $pagination.show();
+        }
+        else{
+          $pagination.hide();
+        }
         return;
       }
 
@@ -128,7 +139,15 @@ function listTopMovies(input) {
     });
 }
 
-function fetchMovies() {
-  let url = urlJoin(proxyUrl, baseUrl, 'search/title', `?year=${query.year}`, '&title_type=feature', `&sort=${query.sort},asc`, `&page=${query.page}`);
-  return fetchDocument(url).then(doc => parseMovies(doc));
+function getUrl() {
+  let qString = queryString.stringify({year: query.year, title_type: 'feature', page: query.page}, '&', '=');
+  return urlJoin(proxyUrl, baseUrl, `search/title?${qString}`);
+}
+
+function fetchData() {
+  return fetchDocument(getUrl())
+    .then(doc => [
+      parseMovies(doc),
+      parseMovieCount(doc)
+    ]);
 }

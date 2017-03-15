@@ -172,10 +172,16 @@ a.list-group-item:hover {
   color: $primary-background-color;
 }
 
+.movie-count {
+  text-align: center;
+  font-family: "Exo", sans-serif;
+  margin-bottom: 50px;
+}
+
 .sn-pagination {
-  display: block;
+  display: none;
   width: 160px;
-  margin: 0 auto;
+  margin: -30px auto;
   padding-bottom: 60px;
 }
 

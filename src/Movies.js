@@ -17,6 +17,19 @@ function getSpecificContentArray($context, selector, i) {
   return $($context.find(selector)[i]).text().trim();
 }
 
+function parseCount(str) {
+  if(!str) {
+    return 0;
+  }
+
+  str = str.match(/(\d*,?\d+)\s*titles/i)[1].split(',');
+
+  if (str[1]){
+    return Number(`${str[0]}${str[1]}`)
+  } else {
+    return Number(str[0]);
+  }
+}
 
 function parseMovie($row) {
   let title = getText($row, '.lister-item-header a');
@@ -30,6 +43,22 @@ function parseMovie($row) {
   let votes = getSpecificContentArray($row, '.sort-num_votes-visible span', 1);
 
   return { title, url, rating, metascore, runtime, desc, imgUrl, genre, votes };
+}
+
+function parseMovieCount(doc) {
+  let $article = $(doc).find('#main .article');
+  let total = parseCount(getText($article, '.lister .nav .desc'));
+  let rendered = $(doc).find('#main .article .lister-list .lister-item').length;
+
+  return { total, rendered };
+}
+
+function renderMovieCount($output, movieCount, maxDisplayCount, page){
+  let from = maxDisplayCount * page - maxDisplayCount + 1;
+  let to = from + movieCount.rendered - 1;
+  let html = `
+    <p>Showing ${from} to ${to} out of ${movieCount.total}</p>`;
+  $output.append(html);
 }
 
 function renderMovie($output, movie) {
@@ -56,4 +85,4 @@ function parseMovies(doc) {
   return $rows.map((_, el) => parseMovie($(el))).get();
 }
 
-module.exports = { parseMovies, renderMovie };
+module.exports = { parseMovies, renderMovie, parseMovieCount, renderMovieCount};

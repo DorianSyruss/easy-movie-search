@@ -11,7 +11,8 @@ const path = require('path');
 module.exports = {
   entry: [
     'bootstrap-loader',
-    './src'
+    path.join(__dirname, './style/main.scss'),
+    path.join(__dirname, './src')
   ],
   devtool: "eval",
   output: {

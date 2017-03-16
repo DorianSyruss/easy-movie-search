@@ -1,11 +1,9 @@
 'use strict';
 
-require('./../style/main.scss');
-
 import 'whatwg-fetch';
 import $ from 'jquery';
 import urlJoin from 'url-join';
-import queryString from 'querystring';
+import qs from 'querystring';
 import './errors';
 import { parseMovies, renderMovie, parseMovieCount, renderMovieCount } from './Movies';
 import { fetchDocument, parseYear } from './Utils';
@@ -28,15 +26,10 @@ class Loader {
 }
 
 // ui elements
-const sortButtonList = $('.sortBy li span');
+const $sortButtonList = $('.sortBy li span');
 const $btnList = $('#btnList');
 const $btnPrev = $('.button-previous');
 const $btnNext = $('.button-next');
-const $btnSortPopular = $('.popular');
-const $btnSortAlphabetic = $('.alphabetic');
-const $btnSortRating = $('.rating');
-const $btnSortVotes = $('.votes');
-const $btnSortRuntime = $('.runtime');
 const $pagination = $('.sn-pagination');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
@@ -44,81 +37,63 @@ const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
+
 const query = {
-  sortBy: 'moviemeter',
+  sort: 'moviemeter',
+  title_type: 'feature',
   year: (new Date()).getFullYear(),
   page: 1
 };
 
-
 // wire-up event listeners
 $btnList.click(() => {
   query.page = 1;
-  listTopMovies(readYear())
+  listTopMovies(query, readYear());
 });
 
 $yearField.keyup(e => {
   if (e.keyCode !== ENTER) return;
   query.page = 1;
-  listTopMovies(readYear());
+  listTopMovies(query, readYear());
 });
 
 $btnNext.click(() => {
   query.page++;
-  listTopMovies(query.year);
+  listTopMovies(query);
 });
 
 $btnPrev.click(() => {
-  if(query.page > 1){
-    query.page--;
-    listTopMovies(query.year);
-  }
+  if (query.page <= 1) return;
+  query.page--;
+  listTopMovies(query);
 });
 
 // 'Sort By' buttons, wire-up event listeners
 
-$btnSortPopular.click(function() {
-  query.sortBy = 'moviemeter';
-  focusClickedItem.call(this);
-  listTopMovies(query.year);
+$sortButtonList.click(({ target: el }) => {
+  let $button = $(el);
+  query.sort = $button.data('sort-method');
+  focusClickedItem(query.sort);
+  listTopMovies(query);
 });
 
-$btnSortAlphabetic.click(function() {
-  query.sortBy = 'alpha';
-  focusClickedItem.call(this);
-  listTopMovies(query.year);
-});
 
-$btnSortRating.click(function() {
-  query.sortBy = 'user_rating';
-  focusClickedItem.call(this);
-  listTopMovies(query.year);
-});
-
-$btnSortVotes.click(function() {
-  query.sortBy = 'num_votes';
-  focusClickedItem.call(this);
-  listTopMovies(query.year);
-});
-
-$btnSortRuntime.click(function() {
-  query.sortBy = 'runtime';
-  focusClickedItem.call(this);
-  listTopMovies(query.year);
-});
-
-function focusClickedItem() {
-  sortButtonList.removeClass('clicked');
-  $(this).addClass('clicked');
+function focusClickedItem(sortMethod='moviemeter') {
+  $sortButtonList.each((i, el) => {
+    let $button = $(el);
+    $button.toggleClass('clicked', $button.data('sort-method') === sortMethod);
+  });
 }
 
 function setDisabled($input, disabled=true) {
   $input.prop('disabled', disabled);
 }
 
+const flashMessage = err => messages[err.code || 'default'];
+
 // initial rendering
 loader.start();
-listTopMovies(query.year);
+listTopMovies(query);
 
 function readYear() {
   let year = $yearField.val();
@@ -126,12 +101,10 @@ function readYear() {
   return year;
 }
 
-const flashMessage = err => messages[err.code || 'default'];
-
-function listTopMovies(input) {
+function listTopMovies(query, yearStr) {
   $pagination.hide();
   setDisabled($yearField);
-  let [ err, year ] = parseYear(input);
+  let [ err, year ] = parseYear(yearStr || query.year);
 
   // reset ui
   $movieList.empty();
@@ -157,7 +130,15 @@ function listTopMovies(input) {
 
   // fetch movies
   loader.start();
-  fetchData()
+
+  let queryStr = qs.stringify(query, '&', '=');
+  let url = urlJoin(proxyUrl, baseUrl, '/search/title/', `?${queryStr}`);
+
+  return fetchDocument(url)
+    .then(doc => [
+      parseMovies(doc),
+      parseMovieCount(doc)
+    ])
     .then(([movies, movieCount]) => {
       loader.stop();
       setDisabled($yearField, false);
@@ -180,18 +161,4 @@ function listTopMovies(input) {
         .text(messages[Error.NO_RESULTS])
         .fadeIn('slow');
     });
-}
-
-function getUrl() {
-  let query_String = queryString.stringify({year: query.year, title_type: 'feature', page: query.page, sort: query.sortBy }, '&', '=');
-  console.log(urlJoin(proxyUrl, baseUrl, `search/title?${query_String}`));
-  return urlJoin(proxyUrl, baseUrl, `search/title?${query_String}`);
-}
-
-function fetchData() {
-  return fetchDocument(getUrl())
-    .then(doc => [
-      parseMovies(doc),
-      parseMovieCount(doc)
-    ]);
 }

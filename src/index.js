@@ -7,7 +7,7 @@ import qs from 'querystring';
 import './errors';
 import { parseMovies, renderMovie, parseMovieCount, renderMovieCount } from './Movies';
 import { fetchDocument, parseYear } from './Utils';
-import { proxyUrl, baseUrl, maxDisplayCount} from './config';
+import { proxyUrl, baseUrl, maxDisplayCount } from './config';
 
 const ENTER = 13;
 

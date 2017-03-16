@@ -28,9 +28,15 @@ class Loader {
 }
 
 // ui elements
+const sortButtonList = $('.sortBy li span');
 const $btnList = $('#btnList');
 const $btnPrev = $('.button-previous');
 const $btnNext = $('.button-next');
+const $btnSortPopular = $('.popular');
+const $btnSortAlphabetic = $('.alphabetic');
+const $btnSortRating = $('.rating');
+const $btnSortVotes = $('.votes');
+const $btnSortRuntime = $('.runtime');
 const $pagination = $('.sn-pagination');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
@@ -57,6 +63,11 @@ $yearField.keyup(e => {
   listTopMovies(readYear());
 });
 
+$btnNext.click(() => {
+  query.page++;
+  listTopMovies(query.year);
+});
+
 $btnPrev.click(() => {
   if(query.page > 1){
     query.page--;
@@ -64,10 +75,42 @@ $btnPrev.click(() => {
   }
 });
 
-$btnNext.click(() => {
-  query.page++;
+// 'Sort By' buttons, wire-up event listeners
+
+$btnSortPopular.click(function() {
+  query.sortBy = 'moviemeter';
+  focusClickedItem.call(this);
   listTopMovies(query.year);
 });
+
+$btnSortAlphabetic.click(function() {
+  query.sortBy = 'alpha';
+  focusClickedItem.call(this);
+  listTopMovies(query.year);
+});
+
+$btnSortRating.click(function() {
+  query.sortBy = 'user_rating';
+  focusClickedItem.call(this);
+  listTopMovies(query.year);
+});
+
+$btnSortVotes.click(function() {
+  query.sortBy = 'num_votes';
+  focusClickedItem.call(this);
+  listTopMovies(query.year);
+});
+
+$btnSortRuntime.click(function() {
+  query.sortBy = 'runtime';
+  focusClickedItem.call(this);
+  listTopMovies(query.year);
+});
+
+function focusClickedItem() {
+  sortButtonList.removeClass('clicked');
+  $(this).addClass('clicked');
+}
 
 function setDisabled($input, disabled=true) {
   $input.prop('disabled', disabled);
@@ -140,8 +183,9 @@ function listTopMovies(input) {
 }
 
 function getUrl() {
-  let qString = queryString.stringify({year: query.year, title_type: 'feature', page: query.page}, '&', '=');
-  return urlJoin(proxyUrl, baseUrl, `search/title?${qString}`);
+  let query_String = queryString.stringify({year: query.year, title_type: 'feature', page: query.page, sort: query.sortBy }, '&', '=');
+  console.log(urlJoin(proxyUrl, baseUrl, `search/title?${query_String}`));
+  return urlJoin(proxyUrl, baseUrl, `search/title?${query_String}`);
 }
 
 function fetchData() {

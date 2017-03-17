@@ -16,6 +16,9 @@
   100% { transform: rotate(360deg); }
 }
 
-.clicked {
+.active-sort {
   color: #555 !important;
+  background: rgba(50, 193, 224, 0.77) !important;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
+

@@ -114,7 +114,7 @@ a.list-group-item:hover {
 
   ul {
     display: block;
-    width: 504px;
+    width: 560px;
     padding: 10px;
     margin: 0 auto;
 
@@ -124,13 +124,16 @@ a.list-group-item:hover {
       padding-right: 5px;
       border-left: 1px solid #ddd;
 
-      span {
+      button {
         color: #0c84e4;
+        border: none;
+        background: none;
         font-family: "Exo", sans-serif;
+        outline: none;
 
         &:hover {
           color: #0a68b4;
-          cursor: default;
+          cursor: hand;
         }
       }
 
@@ -223,16 +226,15 @@ a.list-group-item:hover {
 
 footer {
   background: $titles-color;
-  height: 50px;
+  height: 40px;
   width: 100%;
   position: fixed;
   bottom: 0;
 
   p {
     color: $primary-background-color;
-    font-family: inherit;
     text-align: center;
-    padding-top: 16px;
+    padding-top: 10px;
   }
 }
 

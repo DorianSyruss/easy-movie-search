@@ -26,7 +26,7 @@ class Loader {
 }
 
 // ui elements
-const $sortButtonList = $('.sortBy li span');
+const $sortButtonList = $('.sortBy li button');
 const $btnList = $('#btnList');
 const $btnPrev = $('.button-previous');
 const $btnNext = $('.button-next');
@@ -47,12 +47,14 @@ const query = {
 
 // wire-up event listeners
 $btnList.click(() => {
+  $movieList.empty();
   query.page = 1;
   listTopMovies(query, readYear());
 });
 
 $yearField.keyup(e => {
   if (e.keyCode !== ENTER) return;
+  $movieList.empty();
   query.page = 1;
   listTopMovies(query, readYear());
 });
@@ -72,21 +74,26 @@ $btnPrev.click(() => {
 
 $sortButtonList.click(({ target: el }) => {
   let $button = $(el);
+  setDisabled($yearField, $sortButtonList);
+  $movieList.empty();
+  query.page = 1;
   query.sort = $button.data('sort-method');
-  focusClickedItem(query.sort);
+  focusactiveItem(query.sort);
   listTopMovies(query);
 });
 
 
-function focusClickedItem(sortMethod='moviemeter') {
+function focusactiveItem(sortMethod='moviemeter') {
   $sortButtonList.each((i, el) => {
     let $button = $(el);
-    $button.toggleClass('clicked', $button.data('sort-method') === sortMethod);
+    $button.toggleClass('active-sort', $button.data('sort-method') === sortMethod);
   });
 }
 
-function setDisabled($input, disabled=true) {
+function setDisabled($input, button, disabled=true) {
+  let $button = $(button);
   $input.prop('disabled', disabled);
+  $button.prop('disabled', disabled);
 }
 
 const flashMessage = err => messages[err.code || 'default'];
@@ -103,11 +110,10 @@ function readYear() {
 
 function listTopMovies(query, yearStr) {
   $pagination.hide();
-  setDisabled($yearField);
+  setDisabled($yearField, $sortButtonList);
   let [ err, year ] = parseYear(yearStr || query.year);
 
   // reset ui
-  $movieList.empty();
   $movieCount.empty();
   $flashMessage.hide();
 
@@ -118,7 +124,7 @@ function listTopMovies(query, yearStr) {
       .text(flashMessage(err))
       .slideDown('fast');
 
-    setDisabled($yearField, false);
+    setDisabled($yearField, $sortButtonList, false);
     return;
   }
 
@@ -141,12 +147,12 @@ function listTopMovies(query, yearStr) {
     ])
     .then(([movies, movieCount]) => {
       loader.stop();
-      setDisabled($yearField, false);
+      setDisabled($yearField, $sortButtonList, false);
       // update movie list
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
         renderMovieCount($movieCount, movieCount, maxDisplayCount, query.page);
-        if( movieCount.total > maxDisplayCount ) {
+        if(movieCount.total > maxDisplayCount) {
           $pagination.show();
         }
         else{

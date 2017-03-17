@@ -3,6 +3,7 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Diplomata+SC" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -41,11 +42,11 @@
       <div class="sortBy">
         <ul>
           <li><p>Sort By:</p></li>
-          <li><span data-sort-method="moviemeter" class="clicked">Popularity</span></li>
-          <li><span data-sort-method="alpha">Alphabetical</span></li>
-          <li><span data-sort-method="user_rating">IMDB Rating</span></li>
-          <li><span data-sort-method="num_votes">Number of Votes</span></li>
-          <li><span data-sort-method="runtime">Runtime</span></li>
+          <li><button data-sort-method="moviemeter" class="active-sort">Popularity</button></li>
+          <li><button data-sort-method="user_rating">IMDB Rating</button></li>
+          <li><button data-sort-method="num_votes">Number of Votes</button></li>
+          <li><button data-sort-method="alpha">Alphabetical</button></li>
+          <li><button data-sort-method="runtime">Runtime</button></li>
         </ul>
       </div>
       <ul class="movies list-group"></ul>
@@ -53,8 +54,8 @@
       <div class="movie-count"></div>
       <div class="sn-pagination">
         <ul class="pager">
-          <li><a class="button-previous" href="#">Previous</a></li>
-          <li><a class="button-next" href="#">Next</a></li>
+          <li><button class="button-previous">Previous</button></li>
+          <li><button class="button-next">Next</button></li>
         </ul>
       </div>
     </div>

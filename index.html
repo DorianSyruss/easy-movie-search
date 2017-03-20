@@ -11,55 +11,60 @@
   <title>IMDBPro</title>
 </head>
 <body>
-  <div class="content-wrapper">
-    <div class="container">
-      <div class="navbar navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="assets/img/imdb_pro.png"></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-middle">
-            <li class="active"><a href="/">Home</a></li>
-          </ul>
-        </div>
+<div class="content-wrapper">
+  <div class="container">
+    <div class="navbar navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="assets/img/imdb_pro.png"></a>
       </div>
-      <h1> MOST POPULAR MOVIES RELEASED IN <span id="yearTitle">2017</span></h1>
-      <div class="search input-group">
-        <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
-        <span class="input-group-btn">
-          <button id="btnList" class="btn btn-primary" type="button">Search</button>
-        </span>
-      </div>
-      <div class="messageBoard">
-        <div class="flash-message"></div>
-      </div>
-      <div class="sortBy">
-        <ul>
-          <li><p>Sort By:</p></li>
-          <li><button data-sort-method="moviemeter" class="active-sort">Popularity</button></li>
-          <li><button data-sort-method="user_rating">IMDB Rating</button></li>
-          <li><button data-sort-method="num_votes">Number of Votes</button></li>
-          <li><button data-sort-method="alpha">Alphabetical</button></li>
-          <li><button data-sort-method="runtime">Runtime</button></li>
-        </ul>
-      </div>
-      <ul class="movies list-group"></ul>
-      <div class="loader"></div>
-      <div class="movie-count"></div>
-      <div class="sn-pagination">
-        <ul class="pager">
-          <li><button class="button-previous">Previous</button></li>
-          <li><button class="button-next">Next</button></li>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-middle">
+          <li class="active"><a href="/">Home</a></li>
         </ul>
       </div>
     </div>
-    <footer><p>Made by {{ author }}, All rights reserved {{ year }}</p></footer>
+    <h1> MOST POPULAR MOVIES RELEASED IN <span id="yearTitle">2017</span></h1>
+    <div class="search input-group">
+      <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
+      <span class="input-group-btn">
+          <button id="btnList" class="btn btn-primary" type="button">Search</button>
+        </span>
+    </div>
+    <div class="messageBoard">
+      <div class="flash-message"></div>
+    </div>
+    <div class="sortBy">
+      <ul>
+        <li><p>Sort By:</p></li>
+        <li>
+          <button data-sort-method="moviemeter" class="active-sort">Popularity</button>
+        </li>
+        <li>
+          <button data-sort-method="user_rating">IMDB Rating</button>
+        </li>
+        <li>
+          <button data-sort-method="num_votes">Number of Votes</button>
+        </li>
+        <li>
+          <button data-sort-method="alpha">Alphabetical</button>
+        </li>
+        <li>
+          <button data-sort-method="runtime">Runtime</button>
+        </li>
+      </ul>
+      <div class="movie-count"></div>
+    </div>
+    <ul class="movies list-group"></ul>
+    <div class="loader"></div>
   </div>
+  <div class="arrowToTop"></div>
+  <footer><p>Made by {{ author }}, All rights reserved {{ year }}</p></footer>
+</div>
 </body>
 </html>

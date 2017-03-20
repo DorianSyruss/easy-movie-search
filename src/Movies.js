@@ -22,7 +22,7 @@ function parseCount(str) {
     return 0;
   }
 
-  str = str.match(/(\d*,?\d+)\s*titles/i)[1].split(',');
+  str = str.match(/(\d*,?\d+)\s*titles?/i)[1].split(',');
 
   if (str[1]){
     return Number(`${str[0]}${str[1]}`)
@@ -53,12 +53,10 @@ function parseMovieCount(doc) {
   return { total, rendered };
 }
 
-function renderMovieCount($output, movieCount, maxDisplayCount, page){
-  let from = maxDisplayCount * page - maxDisplayCount + 1;
-  let to = from + movieCount.rendered - 1;
+function renderMovieCount($output, movieCount){
   let html = `
-    <p>Showing ${from} to ${to} out of ${movieCount.total}</p>`;
-  $output.append(html);
+    <p>Showing ${movieCount.total} movies</p>`;
+  $output.html(html);
 }
 
 function renderMovie($output, movie) {

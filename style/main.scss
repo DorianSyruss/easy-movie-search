@@ -12,6 +12,10 @@ body {
   overflow-y: scroll;
 }
 
+.container {
+  position: relative;
+}
+
 .glyphicon {
   left: 2px;
   color: #efbe4b;
@@ -214,14 +218,24 @@ a.list-group-item:hover {
 .movie-count {
   text-align: center;
   font-family: "Exo", sans-serif;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
-.sn-pagination {
+.arrowToTop {
   display: none;
-  width: 160px;
-  margin: -30px auto;
-  padding-bottom: 60px;
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #32c1e0;
+  opacity: 0.4;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 footer {
@@ -249,6 +263,11 @@ footer {
 }
 
 @media only screen and (max-width: 767px) {
+  .sortBy ul {
+    width: 530px;
+    font-size: 12px;
+  }
+
   .movies {
     width: 100%;
   }
@@ -267,6 +286,11 @@ footer {
     float: none;
     display: block;
     margin: 0 auto;
+  }
+
+  .sortBy ul {
+    width: 100%;
+    text-align: center;
   }
 
   .movies .movie .content-right {

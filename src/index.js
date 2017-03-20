@@ -26,15 +26,15 @@ class Loader {
 }
 
 // ui elements
+const $window = $(window);
+const $document = $(document);
 const $sortButtonList = $('.sortBy li button');
 const $btnList = $('#btnList');
-const $btnPrev = $('.button-previous');
-const $btnNext = $('.button-next');
-const $pagination = $('.sn-pagination');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
+const $arrowToTop = $('.arrowToTop');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
 
@@ -57,17 +57,6 @@ $yearField.keyup(e => {
   $movieList.empty();
   query.page = 1;
   listTopMovies(query, readYear());
-});
-
-$btnNext.click(() => {
-  query.page++;
-  listTopMovies(query);
-});
-
-$btnPrev.click(() => {
-  if (query.page <= 1) return;
-  query.page--;
-  listTopMovies(query);
 });
 
 // 'Sort By' buttons, wire-up event listeners
@@ -109,7 +98,6 @@ function readYear() {
 }
 
 function listTopMovies(query, yearStr) {
-  $pagination.hide();
   setDisabled($yearField, $sortButtonList);
   let [ err, year ] = parseYear(yearStr || query.year);
 
@@ -152,12 +140,6 @@ function listTopMovies(query, yearStr) {
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
         renderMovieCount($movieCount, movieCount, maxDisplayCount, query.page);
-        if(movieCount.total > maxDisplayCount) {
-          $pagination.show();
-        }
-        else{
-          $pagination.hide();
-        }
         return;
       }
 
@@ -168,3 +150,29 @@ function listTopMovies(query, yearStr) {
         .fadeIn('slow');
     });
 }
+
+
+/* infinite scroll */
+
+$window.scroll(function() {
+  if ($(this).scrollTop()) {
+    $arrowToTop.fadeIn();
+  } else {
+    $arrowToTop.fadeOut();
+  }
+  $window.scroll(function() {
+    if($window.scrollTop() === $document.height() - $window.height()) {
+      query.page++;
+      listTopMovies(query);
+    }
+  });
+});
+
+/* scroll to top */
+
+$arrowToTop.click(function() {
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
+  return false;
+});
+
+

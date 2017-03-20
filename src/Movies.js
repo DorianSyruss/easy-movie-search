@@ -83,4 +83,4 @@ function parseMovies(doc) {
   return $rows.map((_, el) => parseMovie($(el))).get();
 }
 
-module.exports = { parseMovies, renderMovie, parseMovieCount, renderMovieCount};
+module.exports = { parseMovies, renderMovie, parseMovieCount, renderMovieCount };

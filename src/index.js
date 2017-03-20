@@ -35,6 +35,7 @@ const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
+const $movieImg = $('.movies .movie img');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
 
@@ -140,6 +141,10 @@ function listTopMovies(query, yearStr) {
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
         renderMovieCount($movieCount, movieCount, maxDisplayCount, query.page);
+        $movieImg.click(() => {
+          getMovieImg();
+          return false;
+        });
         return;
       }
 
@@ -151,7 +156,6 @@ function listTopMovies(query, yearStr) {
     });
 }
 
-
 /* infinite scroll */
 
 $window.scroll(function() {
@@ -160,19 +164,20 @@ $window.scroll(function() {
   } else {
     $arrowToTop.fadeOut();
   }
-  $window.scroll(function() {
+  console.log($document.height());
     if($window.scrollTop() === $document.height() - $window.height()) {
       query.page++;
       listTopMovies(query);
     }
-  });
 });
 
 /* scroll to top */
 
-$arrowToTop.click(function() {
+$arrowToTop.click(() => {
   $('html, body').animate({ scrollTop: 0 }, 'slow');
   return false;
 });
+
+
 
 

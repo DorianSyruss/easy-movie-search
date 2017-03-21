@@ -35,6 +35,11 @@ const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
+const $movieImgSmall = $('.movie img');
+const $modal = $('.modal');
+const $modalImg = $('.modal .movieImg');
+const $closeBtn = $('.close');
+const $screenFade = $('.screen-fade');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
 
@@ -172,10 +177,31 @@ $arrowToTop.click(() => {
   return false;
 });
 
-$movieList.click('.movie img', e => {
+$movieList.click($movieImgSmall, (e) => {
   let srcStr = $(e.target).attr('src');
+  displayLargeImg(srcStr);
   return false;
 });
 
+$closeBtn.click(() => {
+  closeImgView();
+});
+$screenFade.click(() => {
+  closeImgView();
+});
+$modalImg.click(() => {
+  closeImgView();
+});
 
+function displayLargeImg(src) {
+  let str = src.match(/@+([^;]*).jpg/)[1];
+  src = src.replace(str, '');
+  $modalImg.attr('src', src);
+  $screenFade.fadeIn();
+  $modal.fadeIn();
+}
 
+function closeImgView() {
+  $modal.fadeOut();
+  $screenFade.fadeOut();
+}

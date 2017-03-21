@@ -224,7 +224,7 @@ a.list-group-item:hover {
 .arrowToTop {
   display: none;
   position: fixed;
-  bottom: 50px;
+  bottom: 60px;
   right: 30px;
   width: 0;
   height: 0;
@@ -236,6 +236,43 @@ a.list-group-item:hover {
   &:hover {
     opacity: 1;
   }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  width: 540px;
+  height: 710px;
+  top: 5%;
+  left: 50%;
+  margin-left: -272px;
+  z-index: 1033;
+  overflow-x: visible;
+
+  .close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: 0;
+  }
+
+  .movieImg {
+    width: 540px;
+    height: 710px;
+    padding: 0 15px 0 15px;
+  }
+}
+
+.screen-fade {
+  display: none;
+  position: fixed;
+  top: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  z-index: 1032;
 }
 
 footer {
@@ -288,6 +325,23 @@ footer {
     margin: 0 auto;
   }
 
+  .modal {
+    margin-left: -175px;
+    width: 360px;
+    top: 10%;
+    height: auto;
+
+    .movieImg {
+      width: 350px;
+      height: 500px;
+    }
+
+    .close {
+      top: -18px;
+      right: 12px;
+    }
+  }
+
   .sortBy ul {
     width: 100%;
     text-align: center;
@@ -302,6 +356,25 @@ footer {
 
     h1 {
       font-size: 24px;
+    }
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .modal {
+    margin-left: -150px;
+    width: 310px;
+    top: 7%;
+    height: auto;
+
+    .movieImg {
+      width: 300px;
+      height: 400px;
+    }
+
+    .close {
+      top: -18px;
+      right: 12px;
     }
   }
 }

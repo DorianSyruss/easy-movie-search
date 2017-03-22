@@ -36,8 +36,8 @@ const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
 const $movieImgSmall = $('.movie img');
-const $modal = $('.modal');
-const $modalImg = $('.modal .movieImg');
+const $modal = $('.modal-custom');
+const $modalImg = $('.modal-custom .movieImg');
 const $closeBtn = $('.close');
 const $screenFade = $('.screen-fade');
 const $flashMessage = $('.flash-message');
@@ -131,7 +131,7 @@ function listTopMovies(query, yearStr) {
   loader.start();
 
   let queryStr = qs.stringify(query, '&', '=');
-  let url = urlJoin(proxyUrl, baseUrl, '/search/title/', `?${queryStr}`);
+   let url = urlJoin(proxyUrl, baseUrl, '/search/title/', `?${queryStr}`);
 
   return fetchDocument(url)
     .then(doc => [
@@ -205,3 +205,4 @@ function closeImgView() {
   $modal.fadeOut();
   $screenFade.fadeOut();
 }
+

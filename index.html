@@ -13,6 +13,25 @@
 <body>
 <div class="content-wrapper">
   <div class="container">
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="container-fluid">
+            <h4>Policy</h4>
+            <b>Made by DorianSyruss</b><br>
+            <b>Powered by IMDB, all data rights belong to IMDB, this is just a help tool to find movies easier</b>
+            <h4>Usage</h4>
+            <p>- Find movies by year<br>
+              - Sort by filters<br>
+              - Click on the movie image to get expanded image view<br>
+              - Click on the movie
+            to read more about the title on IMDB</p>
+            <h4>Special thanks</h4>
+            <p>Special thx to contributors<p/>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="navbar navbar-fixed-top" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,7 +44,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-middle">
-          <li class="active"><a href="/">Home</a></li>
+          <li class="active"><a data-toggle="modal" data-target=".bs-example-modal-sm">About</a></li>
         </ul>
       </div>
     </div>
@@ -63,13 +82,13 @@
     <ul class="movies list-group"></ul>
     <div class="loader"></div>
   </div>
-  <div class="modal">
+  <div class="modal-custom">
     <img class="close" src="assets/img/close.ico">
     <img class="movieImg" src="">
   </div>
   <div class="arrowToTop"></div>
   <div class="screen-fade"></div>
-  <footer><p>Made by {{ author }}, All rights reserved {{ year }}</p></footer>
+  <footer><p>Made by {{ author }}, Powered by IMDB {{ year }}</p></footer>
 </div>
 </body>
 </html>

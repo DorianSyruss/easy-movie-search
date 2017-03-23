@@ -14,7 +14,7 @@ module.exports = {
     path.join(__dirname, './style/main.scss'),
     path.join(__dirname, './src')
   ],
-  devtool: "eval",
+  devtool: 'eval',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist')

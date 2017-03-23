@@ -63,7 +63,7 @@ function renderMovie($output, movie) {
   let html = `
     <a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item">
       <div class="title"><span>${movie.title}</span></div> 
-      <img src="${movie.imgUrl}" alt="">
+      <img src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
       <span class = "content-right">
         <ul class="movie-details">
           <li class="rating">${movie.rating || "not rated" }<span class="glyphicon glyphicon-star"></span></li> 

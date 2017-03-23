@@ -36,10 +36,7 @@ const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
 const $movieImgSmall = $('.movie img');
-const $modal = $('.modal-custom');
-const $modalImg = $('.modal-custom .movieImg');
-const $closeBtn = $('.close');
-const $screenFade = $('.screen-fade');
+const $modalImg = $('.img-modal img');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.loader');
 
@@ -180,29 +177,13 @@ $arrowToTop.click(() => {
 $movieList.click($movieImgSmall, (e) => {
   let srcStr = $(e.target).attr('src');
   displayLargeImg(srcStr);
-  return false;
-});
-
-$closeBtn.click(() => {
-  closeImgView();
-});
-$screenFade.click(() => {
-  closeImgView();
-});
-$modalImg.click(() => {
-  closeImgView();
+  e.preventDefault();
 });
 
 function displayLargeImg(src) {
   let str = src.match(/@+([^;]*).jpg/)[1];
   src = src.replace(str, '');
   $modalImg.attr('src', src);
-  $screenFade.fadeIn();
-  $modal.fadeIn();
 }
 
-function closeImgView() {
-  $modal.fadeOut();
-  $screenFade.fadeOut();
-}
 

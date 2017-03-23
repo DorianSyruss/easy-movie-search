@@ -10,7 +10,7 @@
 <body>
 <div class="content-wrapper">
   <div class="container">
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade about-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="container-fluid">
@@ -26,7 +26,7 @@
             <h4>Special thanks</h4>
             <span>Special thx to contributors</span><br>
             <span>vladimyr <a href="https://github.com/vladimyr" target="_blank"><i class="icon-github"></i></a><br></span>
-            <span>kronicker <a href="https://github.com/kronicker" target="_blank"><i class="icon-github"></i></a><br></span>
+            <p>kronicker <a href="https://github.com/kronicker" target="_blank"><i class="icon-github"></i></a><br></p>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-middle">
-          <li class="active"><a data-toggle="modal" data-target=".bs-example-modal-sm">About</a></li>
+          <li class="active"><a data-toggle="modal" data-target=".about-modal">About</a></li>
         </ul>
       </div>
     </div>
@@ -51,7 +51,7 @@
     <div class="search input-group">
       <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
       <span class="input-group-btn">
-          <button id="btnList" class="btn btn-primary" type="button">Search</button>
+          <button id="btnList" class="btn btn-default btn-sm" type="button">Search</button>
         </span>
     </div>
     <div class="messageBoard">
@@ -79,11 +79,20 @@
       <div class="movie-count"></div>
     </div>
     <ul class="movies list-group"></ul>
-    <div class="loader"></div>
-  </div>
-  <div class="modal-custom">
-    <img class="close" src="assets/img/close.ico">
-    <img class="movieImg" src="">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+    <div class="modal fade img-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="container-fluid">
+            <img src="">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="arrowToTop"></div>
   <div class="screen-fade"></div>

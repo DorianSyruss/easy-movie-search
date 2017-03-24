@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "build": "webpack -p --config ./webpack.config.js --display-modules",
     "dev": "webpack-dev-server",
-    "stage": "webpack --config ./webpack.config.js && cd ./dist && now"
+    "stage": "webpack --config ./webpack.config.js && cd ./dist && now",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",

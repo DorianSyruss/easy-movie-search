@@ -1,9 +1,10 @@
 {
-  "name": "scrape-now",
+  "name": "easy-movie-search",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server.js",
     "build": "webpack -p --config ./webpack.config.js --display-modules",
     "dev": "webpack-dev-server",
     "stage": "webpack --config ./webpack.config.js && cd ./dist && now"
@@ -34,6 +35,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.2",
     "eslint": "^3.17.1",
+    "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
     "html-string-replace-webpack-plugin": "^1.0.5",

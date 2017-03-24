@@ -23,7 +23,7 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       use: 'babel-loader',
-      exclude: 'node_modules'
+      exclude: path.join(__dirname, 'node_modules')
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({

@@ -66,7 +66,7 @@ function renderMovie($output, movie) {
       <img src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
       <span class = "content-right">
         <ul class="movie-details">
-          <li class="rating">${movie.rating || "not rated" }<span class="glyphicon glyphicon-star"></span></li> 
+          <li class="rating">${movie.rating || "not rated" }<span class="icon-star"></span></li> 
           <li class="metascore">${movie.metascore || "not rated" }<span> Metascore</span></li>
           <li class="runtime">${movie.runtime + " min" || "unknown: min"}</li>
           <li class="genre">${movie.genre}</li>

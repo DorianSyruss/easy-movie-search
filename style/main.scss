@@ -15,13 +15,9 @@ body {
   position: relative;
 }
 
-.glyphicon {
-  left: 2px;
-  color: #efbe4b;
-}
-
-.modal .modal-content {
+.about-modal .modal-content {
   font-family: "Exo", sans-serif;
+  padding: 15px;
 
   a {
     text-decoration: none;
@@ -137,6 +133,10 @@ a.list-group-item:hover {
 .sortBy {
   display: block;
 
+  .active-sort {
+    color: $titles-color;
+  }
+
   ul {
     display: block;
     width: 560px;
@@ -203,6 +203,14 @@ a.list-group-item:hover {
       min-height: 110px;
       margin-left: 20px;
       width: 75%;
+
+      .icon-star {
+        display: inline-block;
+        margin-left: 5px;
+        font-size: 15px;
+        color: #ffd700;
+        vertical-align: text-bottom;
+      }
     }
 
     .movie-details {

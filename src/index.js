@@ -36,9 +36,10 @@ const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
 const $movieImgSmall = $('.movie img');
+const $modal = $('.modal');
 const $modalImg = $('.img-modal img');
 const $flashMessage = $('.flash-message');
-const loader = new Loader('.loader');
+const loader = new Loader('.spinner');
 
 const query = {
   sort: 'moviemeter',
@@ -69,12 +70,16 @@ $sortButtonList.click(({ target: el }) => {
   $movieList.empty();
   query.page = 1;
   query.sort = $button.data('sort-method');
-  focusactiveItem(query.sort);
+  setActiveSort(query.sort);
   listTopMovies(query);
 });
 
+$modal.click(e => {
+    $(e.currentTarget).modal('hide');
+});
 
-function focusactiveItem(sortMethod='moviemeter') {
+
+function setActiveSort(sortMethod='moviemeter') {
   $sortButtonList.each((i, el) => {
     let $button = $(el);
     $button.toggleClass('active-sort', $button.data('sort-method') === sortMethod);
@@ -85,6 +90,12 @@ function setDisabled($input, button, disabled=true) {
   let $button = $(button);
   $input.prop('disabled', disabled);
   $button.prop('disabled', disabled);
+}
+
+function delayFlashHide() {
+    setTimeout(function() {
+        $flashMessage.slideUp();
+    }, 3000);
 }
 
 const flashMessage = err => messages[err.code || 'default'];
@@ -115,6 +126,7 @@ function listTopMovies(query, yearStr) {
       .slideDown('fast');
 
     setDisabled($yearField, $sortButtonList, false);
+    delayFlashHide();
     return;
   }
 
@@ -150,6 +162,7 @@ function listTopMovies(query, yearStr) {
         .addClass('.error')
         .text(messages[Error.NO_RESULTS])
         .fadeIn('slow');
+      delayFlashHide();
     });
 }
 
@@ -181,9 +194,11 @@ $movieList.click($movieImgSmall, (e) => {
 });
 
 function displayLargeImg(src) {
+  if(!(src.match(/@+([^;]*).jpg/))){
+    return ;
+  }
   let str = src.match(/@+([^;]*).jpg/)[1];
   src = src.replace(str, '');
   $modalImg.attr('src', src);
 }
-
 

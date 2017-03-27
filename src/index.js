@@ -194,7 +194,7 @@ $movieList.click($movieImgSmall, (e) => {
 });
 
 function displayLargeImg(src) {
-  if(!(src.match(/@+([^;]*).jpg/))){
+  if(!src || !(src.match(/@+([^;]*).jpg/))){
     return ;
   }
   let str = src.match(/@+([^;]*).jpg/)[1];

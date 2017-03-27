@@ -1,20 +1,23 @@
 'use strict';
 
-const author = require('./package.json').author;
-const webpack = require('webpack');
+const path = require('path');
+const { author, version } = require('./package.json');
+
+const git = require('git-rev-sync');
+const revision = git.short();
+const branch = git.branch();
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlStringReplace = require('html-string-replace-webpack-plugin');
-const path = require('path');
 
-module.exports = {
+let baseConfig = {
   entry: [
     'bootstrap-loader',
     path.join(__dirname, './style/main.scss'),
     path.join(__dirname, './src')
   ],
-  devtool: 'eval',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist')
@@ -65,10 +68,11 @@ module.exports = {
     new HtmlStringReplace({
       enable: true,
       patterns: [{
-          match: /\{\{\s*(\w*)\s*}}/g,
+          match: /{{\s*(\w*)\s*}}/g,
           replacement(_, key) {
             if (key === 'author') return author;
             if (key === 'year') return (new Date()).getFullYear();
+            if (key === 'version') return `${version}-${revision} (${branch})`;
             return '';
           }
       }]
@@ -80,4 +84,10 @@ module.exports = {
       inject: true
     })
   ]
+};
+
+module.exports = env => {
+  let config = Object.assign({}, baseConfig);
+  if (env === 'dev') config.devtool = 'eval';
+  return config;
 };

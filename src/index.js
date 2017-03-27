@@ -202,3 +202,8 @@ function displayLargeImg(src) {
   $modalImg.attr('src', src);
 }
 
+window.onerror = function(msg, url, linenumber) {
+  alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+  return true;
+};
+

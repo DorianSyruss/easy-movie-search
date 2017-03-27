@@ -25,7 +25,7 @@
 
 
     // override default options for rules from base configurations
-    "no-comma-dangle": ["error", "always"],
+    "comma-dangle": ["error", "never"],
     "no-cond-assign": ["error", "always"],
 
     // disable rules from base configurations

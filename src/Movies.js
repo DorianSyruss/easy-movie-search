@@ -25,7 +25,7 @@ function parseCount(str) {
   str = str.match(/(\d*,?\d+)\s*titles?/i)[1].split(',');
 
   if (str[1]){
-    return Number(`${str[0]}${str[1]}`)
+    return Number(`${str[0]}${str[1]}`);
   } else {
     return Number(str[0]);
   }

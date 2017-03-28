@@ -286,6 +286,15 @@ footer {
     color: $primary-background-color;
     text-align: center;
     padding-top: 10px;
+
+    a {
+      color: $brand-color;
+
+      &:hover {
+        text-decoration: none;
+        color: #b2dbfb;
+      }
+    }
   }
 }
 

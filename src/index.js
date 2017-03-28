@@ -26,6 +26,7 @@ class Loader {
 }
 
 // ui elements
+const $html$body = $('html, body');
 const $window = $(window);
 const $document = $(document);
 const $sortButtonList = $('.sortBy li button');
@@ -140,7 +141,7 @@ function listTopMovies(query, yearStr) {
   loader.start();
 
   let queryStr = qs.stringify(query, '&', '=');
-   let url = urlJoin(proxyUrl, baseUrl, '/search/title/', `?${queryStr}`);
+  let url = urlJoin(proxyUrl, baseUrl, '/search/title/', `?${queryStr}`);
 
   return fetchDocument(url)
     .then(doc => [
@@ -183,9 +184,12 @@ $window.scroll(e => {
 /* scroll to top */
 
 $arrowToTop.click(() => {
-  $('html, body').animate({ scrollTop: 0 }, 'slow');
+  $html$body.animate({ scrollTop: 0 }, 'slow');
   return false;
 });
+
+
+/* large img display */
 
 $movieList.click($movieImgSmall, (e) => {
   let srcStr = $(e.target).attr('src');
@@ -201,9 +205,3 @@ function displayLargeImg(src) {
   src = src.replace(str, '');
   $modalImg.attr('src', src);
 }
-
-window.onerror = function(msg, url, linenumber) {
-  alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-  return true;
-};
-

@@ -36,7 +36,7 @@ const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
-const $movieImgSmall = $('.movie img');
+const movieImgSmall = '.movie img';
 const $modal = $('.modal');
 const $modalImg = $('.img-modal img');
 const $flashMessage = $('.flash-message');
@@ -191,17 +191,18 @@ $arrowToTop.click(() => {
 
 /* large img display */
 
-$movieList.click($movieImgSmall, (e) => {
+$movieList.on('click', movieImgSmall, (e) => {
   let srcStr = $(e.target).attr('src');
   displayLargeImg(srcStr);
   e.preventDefault();
 });
 
 function displayLargeImg(src) {
-  if(!src || !(src.match(/@+([^;]*).jpg/))){
+  if(!src || !(src.match(/@{0,}(\._V1.*)\.jpg$/))){
     return ;
   }
-  let str = src.match(/@+([^;]*).jpg/)[1];
+  let str = src.match(/@{0,}(\._V1.*)\.jpg$/)[1];
+  console.log(str);
   src = src.replace(str, '');
   $modalImg.attr('src', src);
 }

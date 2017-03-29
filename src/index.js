@@ -25,6 +25,9 @@ class Loader {
   stop () { this.$el.fadeOut('fast'); }
 }
 
+let pagesFlag = true;
+console.log(typeof (flag));
+
 // ui elements
 const $html$body = $('html, body');
 const $window = $(window);
@@ -113,6 +116,7 @@ function readYear() {
 
 function listTopMovies(query, yearStr) {
   setDisabled($yearField, $sortButtonList);
+  pagesFlag = true;
   let [ err, year ] = parseYear(yearStr || query.year);
 
   // reset ui
@@ -151,6 +155,12 @@ function listTopMovies(query, yearStr) {
     .then(([movies, movieCount]) => {
       loader.stop();
       setDisabled($yearField, $sortButtonList, false);
+
+      // to disable further searching if there's less then one page of content
+      if(movieCount.total <= 50){
+        pagesFlag = false;
+      }
+
       // update movie list
       if (movies.length !== 0) {
         movies.forEach(movie => renderMovie($movieList, movie));
@@ -175,7 +185,7 @@ $window.scroll(e => {
   } else {
     $arrowToTop.fadeOut();
   }
-  if($window.scrollTop() === $document.height() - $window.height()) {
+  if(($window.scrollTop() === $document.height() - $window.height()) && pagesFlag) {
     query.page++;
     listTopMovies(query);
   }

@@ -8,7 +8,7 @@
     "build": "webpack -p --env=prod --config ./webpack.config.js --display-modules",
     "build:dev": "webpack --env=dev --config ./webpack.config.js",
     "dev": "webpack-dev-server",
-    "deploy:heroku": "git push $(git rev-parse --abbrev-ref HEAD):master",
+    "deploy:heroku": "git push heroku $(git rev-parse --abbrev-ref HEAD):master",
     "deploy:surge": "npm run build && surge -p ./dist/ -d https://easy-movie-search.surge.sh",
     "deploy": "npm run deploy:surge",
     "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi"

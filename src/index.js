@@ -26,7 +26,6 @@ class Loader {
 }
 
 let pagesFlag = true;
-console.log(typeof (flag));
 
 // ui elements
 const $html$body = $('html, body');
@@ -212,7 +211,6 @@ function displayLargeImg(src) {
     return ;
   }
   let str = src.match(/@{0,}(\._V1.*)\.jpg$/)[1];
-  console.log(str);
   src = src.replace(str, '');
   $modalImg.attr('src', src);
 }

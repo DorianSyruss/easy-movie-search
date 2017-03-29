@@ -3,9 +3,15 @@
 const path = require('path');
 const { author, version } = require('./package.json');
 
-const git = require('git-rev-sync');
-const revision = git.short();
-const branch = git.branch();
+const _git = require('git-rev-sync');
+function git(action, def=null) {
+  try { return _git[action](); }
+  catch(e) { /* ignore error */ }
+  return def;
+}
+
+const revision = git('short');
+const branch = git('branch');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -72,7 +78,7 @@ let baseConfig = {
           replacement(_, key) {
             if (key === 'author') return author;
             if (key === 'year') return (new Date()).getFullYear();
-            if (key === 'version') return `${version}-${revision} (${branch})`;
+            if (key === 'version') return revision ? `${version}-${revision} (${branch})` : version;
             return '';
           }
       }]

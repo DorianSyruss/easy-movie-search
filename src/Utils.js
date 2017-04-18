@@ -9,8 +9,8 @@ function parseHtml(html) {
 
 function fetchDocument(url) {
   return fetch(url)
-    .then(response => response.json())
-    .then(html => parseHtml(html))
+    .then(response => response.text())
+    .then(html => parseHtml(html));
 }
 
 function createError(code, msg) {

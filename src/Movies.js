@@ -4,7 +4,6 @@ import $ from 'jquery';
 import { baseUrl } from './config';
 import urlJoin from 'url-join';
 
-
 function getAttribute($context, selector, attr) {
   return $context.find(selector).attr(attr);
 }

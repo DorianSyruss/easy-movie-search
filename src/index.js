@@ -28,7 +28,7 @@ class Loader {
 let pagesFlag = true;
 
 // ui elements
-const $html$body = $('html, body');
+const $htmlBody = $('html, body');
 const $window = $(window);
 const $document = $(document);
 const $sortButtonList = $('.sortBy li button');
@@ -38,11 +38,11 @@ const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
-const movieImgSmall = '.movie img';
 const $modal = $('.modal');
 const $modalImg = $('.img-modal img');
 const $flashMessage = $('.flash-message');
 const loader = new Loader('.spinner');
+const movieImgSelector = '.movie img';
 
 const query = {
   sort: 'moviemeter',
@@ -77,10 +77,7 @@ $sortButtonList.click(({ target: el }) => {
   listTopMovies(query);
 });
 
-$modal.click(e => {
-    $(e.currentTarget).modal('hide');
-});
-
+$modal.click(e => $(e.currentTarget).modal('hide'));
 
 function setActiveSort(sortMethod='moviemeter') {
   $sortButtonList.each((i, el) => {
@@ -89,14 +86,13 @@ function setActiveSort(sortMethod='moviemeter') {
   });
 }
 
-function setDisabled($input, button, disabled=true) {
-  let $button = $(button);
+function setDisabled($input, $button, disabled=true) {
   $input.prop('disabled', disabled);
   $button.prop('disabled', disabled);
 }
 
 function delayFlashHide() {
-    setTimeout(function() {
+    setTimeout(() => {
         $flashMessage.slideUp();
     }, 3000);
 }
@@ -156,7 +152,7 @@ function listTopMovies(query, yearStr) {
       setDisabled($yearField, $sortButtonList, false);
 
       // to disable further searching if there's less then one page of content
-      if(movieCount.total <= 50){
+      if (movieCount.total <= 50){
         pagesFlag = false;
       }
 
@@ -178,13 +174,19 @@ function listTopMovies(query, yearStr) {
 
 /* infinite scroll */
 
+let isRendered = false;
+
 $window.scroll(e => {
-  if ($(e.target).scrollTop()) {
+  if ($(e.target).scrollTop() && isRendered === false) {
     $arrowToTop.fadeIn();
-  } else {
-    $arrowToTop.fadeOut();
+    isRendered = true;
   }
-  if(($window.scrollTop() === $document.height() - $window.height()) && pagesFlag) {
+  else if ($(e.target).scrollTop() === 0 && isRendered === true) {
+    $arrowToTop.fadeOut();
+    isRendered = false;
+  }
+
+  if (($window.scrollTop() === $document.height() - $window.height()) && pagesFlag) {
     query.page++;
     listTopMovies(query);
   }
@@ -193,24 +195,19 @@ $window.scroll(e => {
 /* scroll to top */
 
 $arrowToTop.click(() => {
-  $html$body.animate({ scrollTop: 0 }, 'slow');
+  $htmlBody.animate({ scrollTop: 0 }, 'slow');
   return false;
 });
 
-
 /* large img display */
 
-$movieList.on('click', movieImgSmall, (e) => {
+$movieList.on('click', movieImgSelector, (e) => {
   let srcStr = $(e.target).attr('src');
   displayLargeImg(srcStr);
   e.preventDefault();
 });
 
 function displayLargeImg(src) {
-  if(!src || !(src.match(/@{0,}(\._V1.*)\.jpg$/))){
-    return ;
-  }
-  let str = src.match(/@{0,}(\._V1.*)\.jpg$/)[1];
-  src = src.replace(str, '');
-  $modalImg.attr('src', src);
+  let url = src.replace(/\._V(.*)$/, '.jpg');
+  $modalImg.attr('src', url);
 }

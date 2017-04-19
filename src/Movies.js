@@ -16,26 +16,17 @@ function getSpecificContentArray($context, selector, i) {
   return $($context.find(selector)[i]).text().trim();
 }
 
-function parseCount(str) {
-  if(!str) {
-    return 0;
-  }
-
-  str = str.match(/(\d*,?\d+)\s*titles?/i)[1].split(',');
-
-  if (str[1]){
-    return Number(`${str[0]}${str[1]}`);
-  } else {
-    return Number(str[0]);
-  }
+function getTotal(str) {
+  let total = str.split(/\s+/)[4] || str.split(/\s+/)[0];
+  return parseInt(total.replace(/,/g, ''), 10);
 }
 
 function parseMovie($row) {
   let title = getText($row, '.lister-item-header a');
   let url = getAttribute($row, '.lister-item-header a', 'href');
-  let rating = parseFloat(getText($row, '.ratings-bar strong').split('/')[0]) || undefined;
-  let metascore = parseFloat(getText($row, '.ratings-metascore span').split('/')[0]) || undefined;
-  let runtime = parseFloat(getText($row, '.text-muted .runtime').split('/')[0]) || undefined;
+  let rating = parseFloat(getAttribute($row, '.ratings-imdb-rating', 'data-value')) || undefined;
+  let metascore = parseFloat(getText($row, '.metascore')) || undefined;
+  let runtime = parseFloat(getText($row, '.text-muted .runtime')) || undefined;
   let desc = getSpecificContentArray($row, '.text-muted', 2); //Used when there is no specific class on element
   let imgUrl = getAttribute($row, '.lister-item-image img', 'loadlate');
   let genre = getText($row, '.text-muted .genre');
@@ -46,10 +37,9 @@ function parseMovie($row) {
 
 function parseMovieCount(doc) {
   let $article = $(doc).find('#main .article');
-  let total = parseCount(getText($article, '.lister .nav .desc'));
-  let rendered = $(doc).find('#main .article .lister-list .lister-item').length;
-
-  return { total, rendered };
+  let $nav = $article.find('.lister .nav .desc');
+  let total = getTotal($nav.text().trim());
+  return { total };
 }
 
 function renderMovieCount($output, movieCount){
@@ -59,8 +49,7 @@ function renderMovieCount($output, movieCount){
 }
 
 function renderMovie($output, movie) {
-  let html = `
-    <a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item">
+  let html=`<a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item">
       <div class="title"><span>${movie.title}</span></div> 
       <img src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
       <span class = "content-right">

@@ -15,12 +15,9 @@
     "func-call-spacing": ["error", "never"],
     "space-in-parens": ["error", "never"],
 
-
-    // override default options for rules from base configurations
     "comma-dangle": ["error", "never"],
     "no-cond-assign": ["error", "always"],
 
-    // disable rules from base configurations
     "no-console": "off",
     "no-debugger": 0,
     "no-undef": "off"

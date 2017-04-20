@@ -6,10 +6,10 @@
         "paths": [
           "M896 384l-313.5-40.781-134.5-279.219-134.531 279.219-313.469 40.781 230.469 208.875-59.469 303.063 277-148.812 277.062 148.812-59.562-303.063 230.5-208.875z"
         ],
+        "width": 896,
         "attrs": [
           {}
         ],
-        "width": 896,
         "isMulticolor": false,
         "isMulticolor2": false,
         "tags": [
@@ -21,15 +21,15 @@
         {}
       ],
       "properties": {
-        "order": 1,
+        "order": 5,
         "id": 0,
         "prevSize": 32,
         "code": 59648,
         "name": "star"
       },
       "setIdx": 0,
-      "setId": 5,
-      "iconIdx": 0
+      "setId": 1,
+      "iconIdx": 1
     },
     {
       "icon": {
@@ -53,13 +53,13 @@
         "ligatures": "github, brand40",
         "name": "github",
         "order": 4,
-        "id": 0,
+        "id": 1,
         "prevSize": 32,
         "code": 60080
       },
-      "setIdx": 2,
-      "setId": 3,
-      "iconIdx": 0
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 2
     }
   ],
   "height": 1024,

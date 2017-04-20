@@ -28,10 +28,11 @@ class Loader {
 let pagesFlag = true;
 
 // ui elements
+const $titleYear = $('#title-year');
 const $htmlBody = $('html, body');
 const $window = $(window);
 const $document = $(document);
-const $sortButtonList = $('.sortBy li button');
+const $sortButtonList = $('.sort-filters button');
 const $btnList = $('#btnList');
 const $yearField = $('#yearField');
 const $yearTitle = $('#yearTitle');
@@ -50,6 +51,9 @@ const query = {
   year: (new Date()).getFullYear(),
   page: 1
 };
+
+//set default search year in title
+$titleYear.text(query.year);
 
 // wire-up event listeners
 $btnList.click(() => {

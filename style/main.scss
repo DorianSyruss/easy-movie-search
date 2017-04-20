@@ -1,6 +1,6 @@
 @import "constants";
 @import "custom_components";
-@import "icomoon/style.css";
+@import "vendor/icomoon/style.css";
 
 body {
   margin: 0;
@@ -15,6 +15,10 @@ body {
 .about-modal .modal-content {
   font-family: "Exo", sans-serif;
   padding: 15px;
+
+  .user-manual {
+    padding-left: 1.75em;
+  }
 
   a {
     text-decoration: none;
@@ -79,7 +83,7 @@ body {
   }
 }
 
-a.list-group-item:hover {
+a.panel:hover {
   text-decoration: none;
   color: $titles-color;
   background-color: rgba(151, 236, 255, 0.07);
@@ -115,7 +119,7 @@ a.list-group-item:hover {
   }
 }
 
-.messageBoard {
+.message-board {
   display: block;
   margin: 5px auto;
   max-width: 300px;
@@ -127,47 +131,26 @@ a.list-group-item:hover {
   font-size: 14px;
 }
 
-.sortBy {
-  display: block;
+.sort-filters {
+  font-family: "Exo", sans-serif;
 
-  .active-sort {
-    color: $titles-color;
-  }
+  .btn {
+    text-transform: none;
+    border-left: 1px solid lightgrey;
+    color: #2196f3;
 
-  ul {
-    display: block;
-    width: 560px;
-    padding: 10px;
-    margin: 0 auto;
+    &.active-sort {
+      color: $titles-color;
+    }
 
-    li {
-      display: inline-block;
-      padding-left: 5px;
-      padding-right: 5px;
-      border-left: 1px solid #ddd;
-
-      button {
-        color: #0c84e4;
-        border: none;
-        background: none;
-        font-family: "Exo", sans-serif;
-        outline: none;
-
-        &:hover {
-          color: #0a68b4;
-          cursor: hand;
-        }
-      }
-
-      &:first-child {
-        border-left: none;
-      }
-
-      &:nth-child(2) {
-        border-left: none;
-      }
+    &:first-child {
+      border-left: none;
     }
   }
+}
+
+.movie-count {
+  margin-top: 10px;
 }
 
 .movies {
@@ -200,6 +183,7 @@ a.list-group-item:hover {
       min-height: 110px;
       margin-left: 20px;
       width: 75%;
+      font-family: "Raleway", serif;
 
       .icon-star {
         display: inline-block;
@@ -212,17 +196,24 @@ a.list-group-item:hover {
 
     .movie-details {
       padding-left: 0;
+      margin-top: -6px;
 
       li {
         display: inline-block;
         padding-right: 5px;
         color: $brand-color;
       }
+
+      .metascore img {
+        width: 16px;
+        margin-left: 4px;
+        display: inline-block;
+      }
     }
 
     .votes { color: $brand-color; }
 
-    img {
+    .movie-img-small {
       float: left;
       width: 80px;
     }
@@ -312,11 +303,6 @@ footer {
 }
 
 @media only screen and (max-width: 767px) {
-  .sortBy ul {
-    width: 530px;
-    font-size: 12px;
-  }
-
   .movies {
     width: 100%;
   }
@@ -331,15 +317,15 @@ footer {
 }
 
 @media only screen and (max-width: 550px) {
-  .movies .movie img {
+  .sort-filters > .btn {
+    float: none;
+    margin-top: 5px;
+  }
+
+  .movies .movie .movie-img-small {
     float: none;
     display: block;
     margin: 0 auto;
-  }
-
-  .sortBy ul {
-    width: 100%;
-    text-align: center;
   }
 
   .movies .movie .content-right {

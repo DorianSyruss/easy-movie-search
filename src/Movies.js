@@ -8,12 +8,8 @@ function getAttribute($context, selector, attr) {
   return $context.find(selector).attr(attr);
 }
 
-function getText($context, selector) {
-  return $context.find(selector).text().trim();
-}
-
-function getSpecificContentArray($context, selector, i) {
-  return $($context.find(selector)[i]).text().trim();
+function getText($context, selector, index = 0) {
+  return $context.find(selector).eq(index).text().trim();
 }
 
 function getTotal(str) {
@@ -27,10 +23,10 @@ function parseMovie($row) {
   let rating = parseFloat(getAttribute($row, '.ratings-imdb-rating', 'data-value')) || undefined;
   let metascore = parseFloat(getText($row, '.metascore')) || undefined;
   let runtime = parseFloat(getText($row, '.text-muted .runtime')) || undefined;
-  let desc = getSpecificContentArray($row, '.text-muted', 2); //Used when there is no specific class on element
+  let desc = getText($row, '.text-muted', 2); //Used when there is no specific class on element
   let imgUrl = getAttribute($row, '.lister-item-image img', 'loadlate');
   let genre = getText($row, '.text-muted .genre');
-  let votes = getSpecificContentArray($row, '.sort-num_votes-visible span', 1);
+  let votes = getAttribute($row, '.sort-num_votes-visible span[data-value]', 'data-value');
 
   return { title, url, rating, metascore, runtime, desc, imgUrl, genre, votes };
 }
@@ -49,18 +45,18 @@ function renderMovieCount($output, movieCount){
 }
 
 function renderMovie($output, movie) {
-  let html=`<a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item">
+  let html=`<a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item panel ">
       <div class="title"><span>${movie.title}</span></div> 
-      <img src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
+      <img class="movie-img-small" src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
       <span class = "content-right">
         <ul class="movie-details">
           <li class="rating">${movie.rating || "not rated" }<span class="icon-star"></span></li> 
-          <li class="metascore">${movie.metascore || "not rated" }<span> Metascore</span></li>
-          <li class="runtime">${movie.runtime + " min" || "unknown: min"}</li>
+          <li class="metascore">${movie.metascore || "not rated" }<span><img src="../assets/img/meta.png"></span></li>
+          <li class="runtime">${movie.runtime || "N/A"}<span> min</span></li>
           <li class="genre">${movie.genre}</li>
         </ul>
           <div class="desc">${movie.desc}</div>
-          <div class="votes">${"Votes: " + movie.votes}</div>
+          <div class="votes">Votes: ${movie.votes || "N/A"}</div>
       </span>
     </a>`;
   $output.append(html);

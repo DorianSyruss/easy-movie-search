@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Exo|Sansita" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Exo|Sansita" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -12,7 +12,7 @@
 <body>
 <div class="content-wrapper">
   <div class="container">
-    <div class="modal fade about-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade about-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="container-fluid">
@@ -20,11 +20,12 @@
             <p>Made by <a href="https://github.com/DorianSyruss" target="_blank"><b>DorianSyruss</b> <i class="icon-github"></i></a><br></p>
             <b>Powered by IMDB, all data rights belong to IMDB, this is just a help tool to find movies easier</b>
             <h4>Usage</h4>
-            <p>- Find movies by year<br>
-              - Sort by filters<br>
-              - Click on the movie image to get expanded image view<br>
-              - Click on the movie
-            to read more about the title on IMDB</p>
+            <ul class="user-manual">
+              <li>Find movies by year</li>
+              <li>Sort by filters</li>
+              <li>Click on the movie image to get expanded image view</li>
+              <li>Click on the movie to read more about the title on IMDB</li>
+            </ul>
             <h4>Special thanks</h4>
             <span>Special thx to contributors</span><br>
             <a href="https://github.com/vladimyr" target="_blank"><span>vladimyr </span><i class="icon-github"></i></a><br>
@@ -49,37 +50,26 @@
         </ul>
       </div>
     </div>
-    <h1> MOST POPULAR MOVIES RELEASED IN <span id="yearTitle">2017</span></h1>
+    <h1> MOST POPULAR MOVIES IN <span id="title-year"></span></h1>
     <div class="search input-group">
       <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
       <span class="input-group-btn">
           <button id="btnList" class="btn btn-default btn-sm" type="button">Search</button>
         </span>
     </div>
-    <div class="messageBoard">
+    <div class="message-board">
       <div class="flash-message"></div>
     </div>
-    <div class="sortBy">
-      <ul>
-        <li><p>Sort By:</p></li>
-        <li>
-          <button data-sort-method="moviemeter" class="active-sort">Popularity</button>
-        </li>
-        <li>
-          <button data-sort-method="user_rating">IMDB Rating</button>
-        </li>
-        <li>
-          <button data-sort-method="num_votes">Number of Votes</button>
-        </li>
-        <li>
-          <button data-sort-method="alpha">Alphabetical</button>
-        </li>
-        <li>
-          <button data-sort-method="runtime">Runtime</button>
-        </li>
-      </ul>
-      <div class="movie-count"></div>
+    <div class="filters-wrapper text-center">
+      <div class="sort-filters btn-group btn-group-sm text-center" role="group">
+        <button data-sort-method="moviemeter" class="active-sort text-primary btn btn-link">Popularity</button>
+        <button data-sort-method="user_rating" class="text-primary btn btn-link">IMDB Rating</button>
+        <button data-sort-method="num_votes" class="text-primary btn btn-link">Number of Votes</button>
+        <button data-sort-method="alpha" class="text-primary btn btn-link">Alphabetical</button>
+        <button data-sort-method="runtime" class="text-primary btn btn-link">Runtime</button>
+      </div>
     </div>
+    <div class="movie-count"></div>
     <ul class="movies list-group"></ul>
     <div class="spinner">
       <div class="bounce1"></div>

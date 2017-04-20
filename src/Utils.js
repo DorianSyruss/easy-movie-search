@@ -9,8 +9,8 @@ function parseHtml(html) {
 
 function fetchDocument(url) {
   return fetch(url)
-    .then(response => response.json())
-    .then(html => parseHtml(html))
+    .then(response => response.text())
+    .then(html => parseHtml(html));
 }
 
 function createError(code, msg) {
@@ -25,7 +25,7 @@ function parseYear(input) {
   }
   let year = Number(input);
   if (isNaN(year)) {
-    return [createError(Error.INVALID_INPUT ,'Invalid year!')];
+    return [createError(Error.INVALID_INPUT, 'Invalid year!')];
   }
   if (year < minYear || year > maxYear) {
     return [createError(Error.OUT_OF_RANGE, 'Year is not in allowed range. (min: 1950, max: 2030)')];

@@ -1,47 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Exo|Sansita" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>IMDBPro</title>
+  <meta name="version" content="{{ version }}">
+  <title>Easy Movie Search</title>
 </head>
-  <body>
-  <div class="content-wrapper">
-    <div class="container">
-      <div class="navbar navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="http://www.imdb.com/" target="_blank"><img src="assets/img/imdb_pro.png"></a>
+<body>
+<div class="content-wrapper">
+  <div class="container">
+    <div class="modal fade about-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="container-fluid">
+            <h4>Policy</h4>
+            <p>Made by <a href="https://github.com/DorianSyruss" target="_blank"><b>DorianSyruss</b> <i class="icon-github"></i></a><br></p>
+            <b>Powered by IMDB, all data rights belong to IMDB, this is just a help tool to find movies easier</b>
+            <h4>Usage</h4>
+            <ul class="user-manual">
+              <li>Find movies by year</li>
+              <li>Sort by filters</li>
+              <li>Click on the movie image to get expanded image view</li>
+              <li>Click on the movie to read more about the title on IMDB</li>
+            </ul>
+            <h4>Special thanks</h4>
+            <span>Special thx to contributors</span><br>
+            <a href="https://github.com/vladimyr" target="_blank"><span>vladimyr </span><i class="icon-github"></i></a><br>
+            <a href="https://github.com/kronicker" target="_blank"><span>kronicker </span><i class="icon-github"></i></a><br>
+          </div>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-middle">
-            <li class="active"><a href="/">Home</a></li>
-          </ul>
-        </div>
       </div>
-      <h1> MOST POPULAR MOVIES RELEASED IN <span id="yearTitle">2017</span></h1>
-      <div class="search input-group">
-        <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
-        <span class="input-group-btn">
-        <button id="btnList" class="btn btn-primary" type="button">Search</button>
-      </span>
-      </div>
-      <div class="messageBoard">
-        <div class="flash-message"></div>
-      </div>
-      <ul class="movies list-group"></ul>
-      <div class="loader"></div>
     </div>
-    <footer><p>Made by {{ author }}, All rights reserved {{ year }}</p></footer>
+    <div class="navbar navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand" target="_blank">Easy Movie Search</div>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-middle">
+          <li class="active"><a data-toggle="modal" data-target=".about-modal">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <h1> MOST POPULAR MOVIES IN <span id="title-year"></span></h1>
+    <div class="search input-group">
+      <input id="yearField" class="form-control" type="text" placeholder="Enter year ...">
+      <span class="input-group-btn">
+          <button id="btnList" class="btn btn-default btn-sm" type="button">Search</button>
+        </span>
+    </div>
+    <div class="message-board">
+      <div class="flash-message"></div>
+    </div>
+    <div class="filters-wrapper text-center">
+      <div class="sort-filters btn-group btn-group-sm text-center" role="group">
+        <button data-sort-method="moviemeter" class="active-sort text-primary btn btn-link">Popularity</button>
+        <button data-sort-method="user_rating" class="text-primary btn btn-link">IMDB Rating</button>
+        <button data-sort-method="num_votes" class="text-primary btn btn-link">Number of Votes</button>
+        <button data-sort-method="alpha" class="text-primary btn btn-link">Alphabetical</button>
+        <button data-sort-method="runtime" class="text-primary btn btn-link">Runtime</button>
+      </div>
+    </div>
+    <div class="movie-count"></div>
+    <ul class="movies list-group"></ul>
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+    <div class="modal fade img-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <img src="">
+        </div>
+      </div>
+    </div>
   </div>
-  </body>
+  <div class="arrowToTop"></div>
+  <div class="screen-fade"></div>
+  <footer><p>Made by <a href="https://github.com/DorianSyruss" target="_blank">{{ author }}</a>, Powered by IMDB {{ year }}</p></footer>
+</div>
+</body>
 </html>

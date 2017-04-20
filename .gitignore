@@ -1,6 +1,15 @@
-node_modules/
-.DS_Store
+# editor and OS stuff
 .idea/
+.DS_Store
+
+# dependencies and build artifacts
+node_modules/
 dist/
+
+# icon fonts
+style/vendor/icomoon/*
+!style/vendor/icomoon/style.css
+!style/vendor/icomoon/selection.json
+
 stats.json
 *.log

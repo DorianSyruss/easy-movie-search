@@ -35,7 +35,6 @@ const $document = $(document);
 const $sortButtonList = $('.sort-filters button');
 const $btnList = $('#btnList');
 const $yearField = $('#yearField');
-const $yearTitle = $('#yearTitle');
 const $movieList = $('.movies');
 const $movieCount = $('.movie-count');
 const $arrowToTop = $('.arrowToTop');
@@ -51,9 +50,6 @@ const query = {
   year: (new Date()).getFullYear(),
   page: 1
 };
-
-//set default search year in title
-$titleYear.text(query.year);
 
 // wire-up event listeners
 $btnList.click(() => {
@@ -138,7 +134,7 @@ function listTopMovies(query, yearStr) {
   query.year = year;
 
   // update title
-  $yearTitle.text(query.year);
+  $titleYear.text(query.year);
 
   // fetch movies
   loader.start();

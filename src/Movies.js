@@ -13,8 +13,9 @@ function getText($context, selector, index = 0) {
 }
 
 function getTotal(str) {
-  let total = str.split(/\s+/)[4] || str.split(/\s+/)[0];
-  return parseInt(total.replace(/\.|,/g, ''), 10);
+  let tokens = str.split(/\s+/);
+  let total = tokens[4] || tokens[0];
+  return parseInt(total.replace(/\D/g, ''), 10);
 }
 
 function parseMovie($row) {
@@ -33,7 +34,7 @@ function parseMovie($row) {
 
 function parseMovieCount(doc) {
   let $article = $(doc).find('#main .article');
-  let $nav = $article.find('.lister .nav .desc');
+  let $nav = $article.find('.lister .nav .desc').eq(0);
   let total = getTotal($nav.text().trim());
   return { total };
 }
@@ -46,17 +47,17 @@ function renderMovieCount($output, movieCount){
 
 function renderMovie($output, movie) {
   let html=`<a href="${ urlJoin(baseUrl, movie.url) }" target="_blank" class="movie list-group-item panel ">
-      <div class="title"><span>${movie.title}</span></div> 
+      <div class="title"><span>${movie.title}</span></div>
       <img class="movie-img-small" src="${movie.imgUrl}" data-toggle="modal" data-target=".img-modal">
       <span class = "content-right">
         <ul class="movie-details">
-          <li class="rating">${movie.rating || "not rated" }<span class="icon-star"></span></li> 
-          <li class="metascore">${movie.metascore || "not rated" }<span><img src="../assets/img/meta.png"></span></li>
-          <li class="runtime">${movie.runtime || "N/A"}<span> min</span></li>
+          <li class="rating">${movie.rating || 'not rated' }<span class="icon-star"></span></li>
+          <li class="metascore">${movie.metascore || 'not rated' }<span><img src="../assets/img/meta.png"></span></li>
+          <li class="runtime">${movie.runtime || 'N/A'}<span> min</span></li>
           <li class="genre">${movie.genre}</li>
         </ul>
           <div class="desc">${movie.desc}</div>
-          <div class="votes">Votes: ${movie.votes || "N/A"}</div>
+          <div class="votes">Votes: ${movie.votes || 'N/A'}</div>
       </span>
     </a>`;
   $output.append(html);

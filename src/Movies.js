@@ -14,7 +14,7 @@ function getText($context, selector, index = 0) {
 
 function getTotal(str) {
   let total = str.split(/\s+/)[4] || str.split(/\s+/)[0];
-  return parseInt(total.replace(/,/g, ''), 10);
+  return parseInt(total.replace(/\.|,/g, ''), 10);
 }
 
 function parseMovie($row) {

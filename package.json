@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "build": "webpack -p --env=prod --config ./webpack.config.js --display-modules",
     "build:dev": "webpack --env=dev --config ./webpack.config.js",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --env=dev",
     "deploy:heroku": "git push heroku $(git rev-parse --abbrev-ref HEAD):master",
     "deploy:surge": "npm run build && surge -p ./dist/ -d https://easy-movie-search.surge.sh",
     "deploy": "npm run deploy:surge",

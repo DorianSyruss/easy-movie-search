@@ -6,7 +6,7 @@ const { author, version } = require('./package.json');
 const _git = require('git-rev-sync');
 function git(action, def=null) {
   try { return _git[action](); }
-  catch(e) { /* ignore error */ }
+  catch (e) { /* ignore error */ }
   return def;
 }
 

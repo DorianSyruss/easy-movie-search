@@ -10,8 +10,8 @@
     "dev": "webpack-dev-server --env=dev",
     "deploy:heroku": "git push heroku $(git rev-parse --abbrev-ref HEAD):master",
     "deploy:surge": "npm run build && surge -p ./dist/ -d https://easy-movie-search.surge.sh",
-    "deploy": "npm run deploy:surge",
-    "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi"
+    "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi",
+    "test": "echo \"No tests specified\""
   },
   "repository": {
     "type": "git",

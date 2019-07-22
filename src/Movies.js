@@ -12,12 +12,6 @@ function getText($context, selector, index = 0) {
   return $context.find(selector).eq(index).text().trim();
 }
 
-function getTotal(str) {
-  let tokens = str.split(/\s+/);
-  let total = tokens[4] || tokens[0];
-  return parseInt(total.replace(/\D/g, ''), 10);
-}
-
 function parseMovie($row) {
   let title = getText($row, '.lister-item-header a');
   let url = getAttribute($row, '.lister-item-header a', 'href');
@@ -34,14 +28,14 @@ function parseMovie($row) {
 
 function parseMovieCount(doc) {
   let $article = $(doc).find('#main .article');
-  let $nav = $article.find('.lister .nav .desc').eq(0);
-  let total = getTotal($nav.text().trim());
+  let $nav = $article.find('.nav .desc span');
+  let total = $nav.text();
   return { total };
 }
 
 function renderMovieCount($output, movieCount){
   let html = `
-    <p>Showing ${movieCount.total} movies</p>`;
+    <p>Showing ${movieCount.total}</p>`;
   $output.html(html);
 }
 

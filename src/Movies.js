@@ -29,13 +29,12 @@ function parseMovie($row) {
 function parseMovieCount(doc) {
   let $article = $(doc).find('#main .article');
   let $nav = $article.find('.nav .desc span');
-  let total = $nav.text();
+  let total = $nav.text().slice(0, -1);
   return { total };
 }
 
 function renderMovieCount($output, movieCount){
-  let html = `
-    <p>Showing ${movieCount.total}</p>`;
+  let html = `<p>Showing ${movieCount.total}</p>`;
   $output.html(html);
 }
 
